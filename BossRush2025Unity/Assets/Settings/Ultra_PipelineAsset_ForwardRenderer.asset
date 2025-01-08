@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de640fe3d0db1804a85f9fc8f5cadab6, type: 3}
+  m_Name: Ultra_PipelineAsset_ForwardRenderer
+  m_EditorClassIdentifier: 
+  debugShaders:
+    debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7, type: 3}
+    hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
+    probeVolumeSamplingDebugComputeShader: {fileID: 7200000, guid: 53626a513ea68ce47b59dc1299fe3959, type: 3}
+  probeVolumeResources:
+    probeVolumeDebugShader: {fileID: 0}
+    probeVolumeFragmentationDebugShader: {fileID: 0}
+    probeVolumeOffsetDebugShader: {fileID: 0}
+    probeVolumeSamplingDebugShader: {fileID: 0}
+    probeSamplingDebugMesh: {fileID: 0}
+    probeSamplingDebugTexture: {fileID: 0}
+    probeVolumeBlendStatesCS: {fileID: 0}
+  m_RendererFeatures:
+  - {fileID: 3327570966398154298}
+  m_RendererFeatureMap: 3ab610e929e82d2e
+  m_UseNativeRenderPass: 0
+  xrSystemData: {fileID: 0}
+  postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
+  m_AssetVersion: 2
+  m_OpaqueLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_TransparentLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_DefaultStencilState:
+    overrideStencilState: 0
+    stencilReference: 0
+    stencilCompareFunction: 8
+    passOperation: 2
+    failOperation: 0
+    zFailOperation: 0
+  m_ShadowTransparentReceive: 1
+  m_RenderingMode: 0
+  m_DepthPrimingMode: 0
+  m_CopyDepthMode: 1
+  m_DepthAttachmentFormat: 0
+  m_DepthTextureFormat: 0
+  m_AccurateGbufferNormals: 0
+  m_IntermediateTextureMode: 1
+--- !u!114 &3327570966398154298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9229750f8aa45254c83220390ffd4eb5, type: 3}
+  m_Name: VHS
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    intensity: 1
+    quality: 1
+    samples: 6
+    resolution: 2
+    yiq: {x: 0.9, y: 1.1, z: 1.5}
+    shadowTint: {r: 0, g: 0, b: 0, a: 1}
+    whiteLevel: 1
+    blackLevel: 0
+    tapeCreaseStrength: 1
+    tapeCreaseCount: 8
+    tapeCreaseVelocity: 1.2
+    tapeCreaseNoise: 0.7
+    tapeCreaseDistortion: 0.2
+    colorNoise: 0.1
+    chromaBand: 16
+    lumaBand: 2
+    tapeNoiseHigh: 0.1
+    tapeNoiseLow: 0.1
+    acBeatStrength: 0.1
+    acBeatCount: 0.1
+    acBeatVelocity: 0.2
+    bottomWarpHeight: 15
+    bottomWarpDistortion: 0.1
+    bottomWarpJitterExtent: 50
+    vignette: 0.25
+    brightness: -0.004
+    contrast: 1
+    gamma: 0.69
+    hue: 0
+    saturation: 1
+    affectSceneView: 0
+    filterMode: 1
+    whenToInsert: 550
+    enableProfiling: 0
