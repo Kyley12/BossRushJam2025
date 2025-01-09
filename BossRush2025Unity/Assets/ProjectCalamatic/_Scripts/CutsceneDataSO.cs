@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CutsceneDataSO", menuName = "Scriptable Objects/CutsceneDataSO")]
 public class CutsceneDataSO : ScriptableObject
 {
-    public List<string> lineData = new List<string>();
+    public List<string> lineData;
 
     public void PutStringDataIntoLineData(string data)
     {
