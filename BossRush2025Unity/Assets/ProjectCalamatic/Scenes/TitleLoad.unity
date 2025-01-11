@@ -672,9 +672,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutsceneDataSO: {fileID: 11400000, guid: cb11d56759ccd234ba4eacb66aa8fc9a, type: 2}
   dialogueText: {fileID: 1381937762}
-  scrollRect: {fileID: 1469276645}
   minTypingSpeed: 0.05
   maxTypingSpeed: 0.1
+  maxLinesOnScreen: 6
   spinSpeed: 0.1
   nextSceneName: VirtualDesktopScene
 --- !u!1 &1300319480

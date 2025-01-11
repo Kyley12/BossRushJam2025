@@ -20,6 +20,7 @@ public class OpeningCutsceneManager : MonoBehaviour
 
     private void Start()
     {
+        cutsceneDataSO = Resources.Load<CutsceneDataSO>("CutsceneDataSO");
         ResetCutsceneState();
         StartCutscene(cutsceneDataSO);
     }
