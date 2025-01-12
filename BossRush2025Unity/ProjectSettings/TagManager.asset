@@ -13,7 +13,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Button
   - 
   - 
   - 
@@ -42,6 +42,18 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Back
+    uniqueID: 3609998705
+    locked: 0
+  - name: Middle
+    uniqueID: 1052415087
+    locked: 0
+  - name: Front
+    uniqueID: 830837883
+    locked: 0
+  - name: Player
+    uniqueID: 1374103655
     locked: 0
   m_RenderingLayers:
   - Default

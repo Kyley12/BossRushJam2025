@@ -27,6 +27,7 @@ public class CutsceneManager : MonoBehaviour
     private Queue<string> displayedLines = new Queue<string>(); // Stores current lines on the screen
     private bool isPaused = false;
     private bool isCutsceneFinished = false;
+    private int currentLineIndex = 0; // Tracks the index of the current line being processed
 
     private void Start()
     {
@@ -59,7 +60,7 @@ public class CutsceneManager : MonoBehaviour
             GoToNextScene();
         }
 
-        if(currentScene == CurrentCutscene.StartMenu && isCutsceneFinished)
+        if (currentScene == CurrentCutscene.StartMenu && isCutsceneFinished)
         {
             GoToNextScene();
         }
@@ -75,9 +76,12 @@ public class CutsceneManager : MonoBehaviour
 
     private IEnumerator ProcessCutscene(CutsceneDataSO cutsceneData)
     {
+        currentLineIndex = 0; // Reset line index at the start of the cutscene
+
         foreach (string line in cutsceneData.lineData)
         {
             yield return StartCoroutine(TypeText(line));
+            currentLineIndex++; // Increment the index after processing a line
         }
 
         isCutsceneFinished = true;
@@ -159,10 +163,22 @@ public class CutsceneManager : MonoBehaviour
 
     private void UpdateDialogueText(string currentLine = "")
     {
-        string fullText = string.Join("\n\n", displayedLines.ToArray());
-        if (!string.IsNullOrEmpty(currentLine))
+        string fullText;
+
+        if (currentLineIndex == 0 && !string.IsNullOrEmpty(currentLine))
         {
-            fullText += $"\n{currentLine}";
+            // For the first line, don't add extra spacing
+            fullText = currentLine;
+        }
+        else
+        {
+            // Combine existing lines with the new line
+            fullText = string.Join("\n\n", displayedLines.ToArray());
+
+            if (!string.IsNullOrEmpty(currentLine))
+            {
+                fullText += $"\n{currentLine}";
+            }
         }
 
         dialogueText.text = fullText;
@@ -178,9 +194,15 @@ public class CutsceneManager : MonoBehaviour
         StopAllCoroutines();
 
         displayedLines.Clear();
+
+        currentLineIndex = 0; // Reset the line index for skipping
+
         foreach (string line in cutsceneDataSO.lineData)
         {
-            displayedLines.Enqueue(line);
+            // Replace '-' with '[complete]' before enqueueing
+            string processedLine = line.Replace("-", "[complete]");
+            displayedLines.Enqueue(processedLine);
+            currentLineIndex++;
         }
 
         UpdateDialogueText();
@@ -199,5 +221,6 @@ public class CutsceneManager : MonoBehaviour
         isCutsceneFinished = false;
         isPaused = false;
         displayedLines.Clear();
+        currentLineIndex = 0; // Reset the current line index
     }
 }
