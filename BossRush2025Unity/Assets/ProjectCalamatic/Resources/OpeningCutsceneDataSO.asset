@@ -12,4 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276359f87a598e341a91d9a9f33940dd, type: 3}
   m_Name: OpeningCutsceneDataSO
   m_EditorClassIdentifier: 
-  lineData: []
+  lineData:
+  - 'Current Date: 12/20/2025'
+  - 'User: Unknown'
+  - 'Driver: B detected'
+  - Loading data... -
+  - ..................
+  - Initilazing... -
+  - ..................
+  - 'OS: Unknown'
+  - 'password: ******'
+  - '[Login Success]'
