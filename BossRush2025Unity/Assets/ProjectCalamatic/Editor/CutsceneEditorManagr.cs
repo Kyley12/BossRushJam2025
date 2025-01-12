@@ -28,7 +28,7 @@ public class CutsceneEditorManagr
     public static void LoadData()
     {
         // Load the CutsceneDataSO ScriptableObject from Resources
-        CutsceneDataSO cutsceneDataSO = Resources.Load<CutsceneDataSO>("CutsceneDataSO");
+        CutsceneDataSO cutsceneDataSO = Resources.Load<CutsceneDataSO>("OpeningCutsceneDataSO");
         if (cutsceneDataSO == null)
         {
             Debug.LogError("CutsceneDataSO could not be loaded. Ensure it is in the Resources folder.");

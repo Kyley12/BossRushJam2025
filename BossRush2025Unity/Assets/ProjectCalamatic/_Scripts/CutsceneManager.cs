@@ -3,9 +3,18 @@ using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class OpeningCutsceneManager : MonoBehaviour
+public class CutsceneManager : MonoBehaviour
 {
+    public enum CurrentCutscene
+    {
+        Opening,
+        StartMenu
+    }
+
+    public CurrentCutscene currentScene;
+
     public CutsceneDataSO cutsceneDataSO;
     public TextMeshProUGUI dialogueText; // UI Text element for dialogue
     public float minTypingSpeed = 0.05f; // Minimum typing speed
@@ -13,6 +22,7 @@ public class OpeningCutsceneManager : MonoBehaviour
     public int maxLinesOnScreen = 6; // Maximum lines displayed on screen
     public float spinSpeed = 0.1f; // Speed of the spin animation
     public string nextSceneName; // Name of the next scene to load
+    public Button startButton; // Reference to the Start button (UI)
 
     private Queue<string> displayedLines = new Queue<string>(); // Stores current lines on the screen
     private bool isPaused = false;
@@ -20,21 +30,36 @@ public class OpeningCutsceneManager : MonoBehaviour
 
     private void Start()
     {
-        cutsceneDataSO = Resources.Load<CutsceneDataSO>("CutsceneDataSO");
         ResetCutsceneState();
-        StartCutscene(cutsceneDataSO);
+
+        // Assign Start button functionality for Start Menu cutscene
+        if (currentScene == CurrentCutscene.StartMenu && startButton != null)
+        {
+            startButton.onClick.AddListener(() => StartCutscene(cutsceneDataSO));
+        }
+
+        // Automatically start the cutscene for the Opening scene
+        if (currentScene == CurrentCutscene.Opening)
+        {
+            StartCutscene(cutsceneDataSO);
+        }
     }
 
     private void Update()
     {
-        // Skip cutscene when Space key is pressed
-        if (Input.GetKeyDown(KeyCode.Space) && !isCutsceneFinished)
+        // Skip cutscene functionality for Opening scene only
+        if (currentScene == CurrentCutscene.Opening && Input.GetKeyDown(KeyCode.Space) && !isCutsceneFinished)
         {
             SkipCutscene();
         }
 
-        // Go to the next scene when Enter key is pressed after the cutscene is finished
-        if (isCutsceneFinished && Input.GetKeyDown(KeyCode.Return)) // KeyCode.Return for Enter key
+        // Move to the next scene when Enter is pressed after Opening cutscene finishes
+        if (currentScene == CurrentCutscene.Opening && isCutsceneFinished && Input.GetKeyDown(KeyCode.Return))
+        {
+            GoToNextScene();
+        }
+
+        if(currentScene == CurrentCutscene.StartMenu && isCutsceneFinished)
         {
             GoToNextScene();
         }
@@ -42,7 +67,10 @@ public class OpeningCutsceneManager : MonoBehaviour
 
     public void StartCutscene(CutsceneDataSO cutsceneData)
     {
-        StartCoroutine(ProcessCutscene(cutsceneData));
+        if (!isCutsceneFinished) // Prevent restarting if already finished
+        {
+            StartCoroutine(ProcessCutscene(cutsceneData));
+        }
     }
 
     private IEnumerator ProcessCutscene(CutsceneDataSO cutsceneData)
@@ -52,9 +80,12 @@ public class OpeningCutsceneManager : MonoBehaviour
             yield return StartCoroutine(TypeText(line));
         }
 
-        // Once all lines are processed, wait for Enter key to transition
         isCutsceneFinished = true;
-        DisplayContinueMessage();
+
+        if (currentScene == CurrentCutscene.Opening)
+        {
+            DisplayContinueMessage();
+        }
     }
 
     private IEnumerator TypeText(string text)
@@ -139,7 +170,6 @@ public class OpeningCutsceneManager : MonoBehaviour
 
     private void DisplayContinueMessage()
     {
-        // Show a message prompting the user to press Enter
         dialogueText.text += "\n[Press Enter to Continue]";
     }
 
