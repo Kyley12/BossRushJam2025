@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpriteButton : MonoBehaviour
 {
@@ -6,7 +7,8 @@ public class SpriteButton : MonoBehaviour
     public Sprite hoverSprite;   // Sprite when hovering
     public Sprite clickedSprite; // Sprite when clicked
 
-    public PlayerCursorMovement playerCursor; // Reference to the player cursor object
+    public UnityEvent onClick; // Event triggered when the button is clicked
+
     private SpriteRenderer spriteRenderer;
     private bool isHovering = false; // Track if the player cursor is over the button
 
@@ -26,24 +28,19 @@ public class SpriteButton : MonoBehaviour
 
     private void Update()
     {
-        if (playerCursor == null)
-        {
-            Debug.LogError("Player cursor is not assigned!");
-            return;
-        }
+        // Detect the player cursor's position
+        Vector2 playerCursorPosition = PlayerCursorMovement.Instance.GetCursorPosition();
 
-        // Check if the player cursor is overlapping this button
-        Vector2 cursorPosition = playerCursor.transform.position;
+        // Check if the player cursor overlaps the button's collider
         Collider2D collider = GetComponent<Collider2D>();
-
-        if (collider != null && collider.OverlapPoint(cursorPosition))
+        if (collider != null && collider.OverlapPoint(playerCursorPosition))
         {
             if (!isHovering)
             {
                 OnHoverEnter();
             }
 
-            // Check for click input
+            // Detect click input
             if (Input.GetMouseButtonDown(0)) // Left mouse button
             {
                 OnClick();
@@ -61,7 +58,7 @@ public class SpriteButton : MonoBehaviour
     private void OnHoverEnter()
     {
         isHovering = true;
-        Debug.Log("Hover Start!");
+        Debug.Log($"Hover Start: {gameObject.name}");
         if (hoverSprite != null)
         {
             spriteRenderer.sprite = hoverSprite;
@@ -71,16 +68,16 @@ public class SpriteButton : MonoBehaviour
     private void OnHoverExit()
     {
         isHovering = false;
-        Debug.Log("Hover End!");
+        Debug.Log($"Hover End: {gameObject.name}");
         if (normalSprite != null)
         {
             spriteRenderer.sprite = normalSprite;
         }
     }
 
-    public void OnClick()
+    private void OnClick()
     {
-        Debug.Log("Button Clicked!");
+        Debug.Log($"Button Clicked: {gameObject.name}");
 
         // Change to clicked sprite temporarily
         if (clickedSprite != null)
@@ -88,8 +85,8 @@ public class SpriteButton : MonoBehaviour
             spriteRenderer.sprite = clickedSprite;
         }
 
-        // Perform the button action
-        PerformAction();
+        // Trigger the assigned action
+        onClick?.Invoke();
 
         // Restore hover or normal sprite
         if (isHovering && hoverSprite != null)
@@ -100,11 +97,5 @@ public class SpriteButton : MonoBehaviour
         {
             spriteRenderer.sprite = normalSprite;
         }
-    }
-
-    private void PerformAction()
-    {
-        // Define the button's action here
-        Debug.Log($"{gameObject.name}: Action performed!");
     }
 }
