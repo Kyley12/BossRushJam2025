@@ -37,6 +37,7 @@ public class Email : MonoBehaviour
         if(currentlyActivatedEmail > 0 && emailNotify.activeInHierarchy)
         {
             emailNotify.SetActive(false);
+            DesktopManager.isViewedEmail = true;
         }
         else
         {

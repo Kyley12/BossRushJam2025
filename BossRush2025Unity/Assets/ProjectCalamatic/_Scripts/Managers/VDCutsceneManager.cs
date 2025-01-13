@@ -31,8 +31,8 @@ public class VDCutsceneManager : MonoBehaviour
 
         if(cutscene1Finished && !cutscene2Finished)
         {
-            testText2.SetActive(true);
-            Invoke("FinishCutscene2Animation", 2);
+            Invoke("StartCutscene2AfterDelay", 2);
+            Invoke("FinishCutscene2Animation", 4);
         }
     }
 
@@ -52,7 +52,11 @@ public class VDCutsceneManager : MonoBehaviour
         BossComesIn();
         cutscene1Finished = true;
     }
-
+    
+    private void StartCutscene2AfterDelay()
+    {
+        testText2.SetActive(true);
+    }
     private void FinishCutscene2Animation()
     {
         testText2.SetActive(false);

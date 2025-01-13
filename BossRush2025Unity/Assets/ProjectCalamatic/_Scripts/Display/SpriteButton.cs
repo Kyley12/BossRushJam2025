@@ -58,7 +58,6 @@ public class SpriteButton : MonoBehaviour
     private void OnHoverEnter()
     {
         isHovering = true;
-        Debug.Log($"Hover Start: {gameObject.name}");
         if (hoverSprite != null)
         {
             spriteRenderer.sprite = hoverSprite;
@@ -68,7 +67,6 @@ public class SpriteButton : MonoBehaviour
     private void OnHoverExit()
     {
         isHovering = false;
-        Debug.Log($"Hover End: {gameObject.name}");
         if (normalSprite != null)
         {
             spriteRenderer.sprite = normalSprite;
