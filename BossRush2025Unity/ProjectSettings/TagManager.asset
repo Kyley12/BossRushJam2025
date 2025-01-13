@@ -58,6 +58,9 @@ TagManager:
   - name: VeryVeryFront
     uniqueID: 2071870601
     locked: 0
+  - name: 3front
+    uniqueID: 2225959937
+    locked: 0
   - name: Player
     uniqueID: 1374103655
     locked: 0

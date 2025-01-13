@@ -22,7 +22,21 @@ public class DraggableTab : MonoBehaviour
 
         // Detect if the player cursor is overlapping the tab's collider
         Collider2D collider = GetComponent<Collider2D>();
-        if (Input.GetMouseButtonDown(0) && collider != null && collider.OverlapPoint(playerCursorPosition))
+
+        // Check if the click is on a button (child object)
+        bool isButtonClicked = false;
+        Collider2D[] hitColliders = Physics2D.OverlapPointAll(playerCursorPosition);
+
+        foreach (var hit in hitColliders)
+        {
+            if (hit.gameObject != gameObject && hit.GetComponent<SpriteButton>() != null)
+            {
+                isButtonClicked = true;
+                break;
+            }
+        }
+
+        if (Input.GetMouseButtonDown(0) && collider != null && collider.OverlapPoint(playerCursorPosition) && !isButtonClicked)
         {
             Debug.Log("Player Cursor Clicked on Tab");
             offset = transform.position - (Vector3)playerCursorPosition;
