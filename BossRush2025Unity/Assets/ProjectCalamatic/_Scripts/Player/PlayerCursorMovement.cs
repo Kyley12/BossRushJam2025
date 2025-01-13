@@ -4,6 +4,8 @@ public class PlayerCursorMovement : MonoBehaviour
 {
     public static PlayerCursorMovement Instance { get; private set; }
 
+    public bool isRequiredCutsceneEnded;
+    public float moveSpeed = 5f; // Speed for WASD movement
     private Camera mainCamera;
     private Vector2 minBounds; // Minimum camera bounds
     private Vector2 maxBounds; // Maximum camera bounds
@@ -41,6 +43,18 @@ public class PlayerCursorMovement : MonoBehaviour
 
     private void Update()
     {
+        if (isRequiredCutsceneEnded)
+        {
+            HandleWASDMovement();
+        }
+        else
+        {
+            HandleMouseMovement();
+        }
+    }
+
+    private void HandleMouseMovement()
+    {
         if (mainCamera != null)
         {
             // Get the mouse position in screen space
@@ -59,6 +73,29 @@ public class PlayerCursorMovement : MonoBehaviour
             // Update the player cursor's position to exactly match the clamped world position
             transform.position = cursorWorldPosition;
         }
+    }
+
+    private void HandleWASDMovement()
+    {
+        // WASD input for cursor movement
+        float moveX = Input.GetAxis("Horizontal"); // A/D or Left/Right keys
+        float moveY = Input.GetAxis("Vertical");   // W/S or Up/Down keys
+
+        // Calculate the new position
+        Vector3 newPosition = transform.position + new Vector3(moveX, moveY, 0) * moveSpeed * Time.deltaTime;
+
+        // Clamp the position within the camera bounds
+        newPosition.x = Mathf.Clamp(newPosition.x, minBounds.x, maxBounds.x);
+        newPosition.y = Mathf.Clamp(newPosition.y, minBounds.y, maxBounds.y);
+
+        // Update the cursor position
+        transform.position = newPosition;
+    }
+
+    public bool IsSpaceKeyPressed()
+    {
+        // Check for Space key press
+        return isRequiredCutsceneEnded && Input.GetKeyDown(KeyCode.Space);
     }
 
     private void CalculateCameraBounds()

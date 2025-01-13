@@ -18,6 +18,10 @@ public class DesktopManager : MonoBehaviour
         {
             emailTab.SetActive(false);
             isEmailTabActive = false;
+            if(!VDCutsceneManager.cutscene1Finished)
+            {
+                VDCutsceneManager.emailViewedAndClosed = true;
+            }
         }
         else
         {
