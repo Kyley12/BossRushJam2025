@@ -3,7 +3,6 @@ using UnityEngine;
 public class DesktopManager : MonoBehaviour
 {
     private bool isEmailTabActive;
-    public static bool isViewedEmail;
     public GameObject emailTab;
     public GameObject startTab;
     private bool isStartTabActive;
@@ -19,11 +18,6 @@ public class DesktopManager : MonoBehaviour
         {
             emailTab.SetActive(false);
             isEmailTabActive = false;
-            if(!VDCutsceneManager.cutscene1Finished && isViewedEmail)
-            {
-                VDCutsceneManager.emailViewedAndClosed = true;
-                isViewedEmail = false;
-            }
         }
         else
         {

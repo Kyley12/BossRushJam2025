@@ -7,23 +7,24 @@ public class Email : MonoBehaviour
     public GameObject emailNotify;
 
     public static bool emailRecived;
-    private int currentlyActivatedEmail = 0;
+    public int currentlyActivatedEmail = 0;
+    private bool isEmailViewed = false; // New flag to track if the email was viewed
 
     private void Update()
     {
-        if(emailRecived)
+        if (emailRecived)
         {
-            if(currentlyActivatedEmail == 0)
+            if (currentlyActivatedEmail == 0)
             {
                 recievedEmail1.SetActive(true);
                 emailNotify.SetActive(true);
             }
-            else if(currentlyActivatedEmail == 1)
+            else if (currentlyActivatedEmail == 1)
             {
                 recievedEmail2.SetActive(true);
                 emailNotify.SetActive(true);
             }
-            else if(currentlyActivatedEmail > 2)
+            else if (currentlyActivatedEmail > 2)
             {
                 return;
             }
@@ -34,14 +35,19 @@ public class Email : MonoBehaviour
 
     public void OnViewedEmail()
     {
-        if(currentlyActivatedEmail > 0 && emailNotify.activeInHierarchy)
+        if (currentlyActivatedEmail < 2 && emailNotify.activeInHierarchy)
         {
             emailNotify.SetActive(false);
-            DesktopManager.isViewedEmail = true;
+            isEmailViewed = true; // Mark the email as viewed
         }
         else
         {
             Debug.Log("It's already viewed Email");
         }
+    }
+
+    public bool IsEmailViewed()
+    {
+        return isEmailViewed; // Getter to check if email was viewed
     }
 }

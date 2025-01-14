@@ -67,5 +67,11 @@ TagManager:
   - name: Boss
     uniqueID: 2428260329
     locked: 0
+  - name: ErrorMessage
+    uniqueID: 3304406809
+    locked: 0
+  - name: ErrorMessageText
+    uniqueID: 727186385
+    locked: 0
   m_RenderingLayers:
   - Default

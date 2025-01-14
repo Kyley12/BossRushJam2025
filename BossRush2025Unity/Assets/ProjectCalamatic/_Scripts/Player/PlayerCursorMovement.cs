@@ -6,9 +6,12 @@ public class PlayerCursorMovement : MonoBehaviour
 
     public bool isRequiredCutsceneEnded;
     public float moveSpeed = 5f; // Speed for WASD movement
+    public float jumpForce = 5f; // Force for jumping
     private Camera mainCamera;
     private Vector2 minBounds; // Minimum camera bounds
     private Vector2 maxBounds; // Maximum camera bounds
+    private Rigidbody2D rb; // Rigidbody2D component for WASD movement
+    private bool isGrounded = true; // Tracks if the cursor is grounded
 
     private void Awake()
     {
@@ -45,10 +48,12 @@ public class PlayerCursorMovement : MonoBehaviour
     {
         if (isRequiredCutsceneEnded)
         {
+            EnableRigidbody2D(); // Ensure Rigidbody2D is enabled in WASD mode
             HandleWASDMovement();
         }
         else
         {
+            DisableRigidbody2D(); // Disable Rigidbody2D in mouse movement mode
             HandleMouseMovement();
         }
     }
@@ -77,25 +82,61 @@ public class PlayerCursorMovement : MonoBehaviour
 
     private void HandleWASDMovement()
     {
+        if (rb == null) return;
+
         // WASD input for cursor movement
         float moveX = Input.GetAxis("Horizontal"); // A/D or Left/Right keys
-        float moveY = Input.GetAxis("Vertical");   // W/S or Up/Down keys
 
-        // Calculate the new position
-        Vector3 newPosition = transform.position + new Vector3(moveX, moveY, 0) * moveSpeed * Time.deltaTime;
+        // Apply horizontal movement
+        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
+
+        // Check for jump with W key
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            isGrounded = false; // Cursor is no longer grounded
+        }
+
+        // Prevent downward movement (disable S key functionality)
+        if (rb.linearVelocity.y < 0 && Input.GetKey(KeyCode.S))
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
+        }
 
         // Clamp the position within the camera bounds
-        newPosition.x = Mathf.Clamp(newPosition.x, minBounds.x, maxBounds.x);
-        newPosition.y = Mathf.Clamp(newPosition.y, minBounds.y, maxBounds.y);
-
-        // Update the cursor position
-        transform.position = newPosition;
+        Vector3 clampedPosition = transform.position;
+        clampedPosition.x = Mathf.Clamp(transform.position.x, minBounds.x, maxBounds.x);
+        clampedPosition.y = Mathf.Clamp(transform.position.y, minBounds.y, maxBounds.y);
+        transform.position = clampedPosition;
     }
 
-    public bool IsSpaceKeyPressed()
+    private void EnableRigidbody2D()
     {
-        // Check for Space key press
-        return isRequiredCutsceneEnded && Input.GetKeyDown(KeyCode.Space);
+        if (rb == null)
+        {
+            rb = gameObject.AddComponent<Rigidbody2D>();
+            rb.gravityScale = 1; // Set gravity scale to normal for 2D plane
+            rb.freezeRotation = true; // Prevent rotation
+        }
+    }
+
+    private void DisableRigidbody2D()
+    {
+        if (rb != null)
+        {
+            Destroy(rb); // Remove Rigidbody2D when not in WASD mode
+            rb = null;
+            isGrounded = true; // Reset grounded state
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Detect collision with ground
+        if (collision.contacts[0].normal.y > 0.5f)
+        {
+            isGrounded = true; // Cursor is grounded
+        }
     }
 
     private void CalculateCameraBounds()
