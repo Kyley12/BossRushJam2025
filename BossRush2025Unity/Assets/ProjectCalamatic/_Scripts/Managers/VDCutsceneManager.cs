@@ -8,8 +8,6 @@ public class VDCutsceneManager : MonoBehaviour
     public GameObject bossPrefab; // Boss object to instantiate during Cutscene 2
     public Transform bossSpawnPoint; // Spawn point for the boss
     public GameObject errorMessagePrefab; // Error message prefab for boss's dialogue
-
-    public CutsceneDataSO cutscene1Data; // Dialogues for Cutscene 1
     public CutsceneDataSO cutscene2Data; // Dialogues for Cutscene 2
     public CutsceneDataSO cutscene3Data; // Dialogues for Cutscene 3
 
@@ -69,7 +67,7 @@ public class VDCutsceneManager : MonoBehaviour
         return desktopManager != null &&
                !desktopManager.emailTab.activeInHierarchy &&
                emailManager != null &&
-               emailManager.IsEmailViewed();
+               emailManager.isEmailViewed;
     }
 
     private IEnumerator StartCutscene1()
@@ -78,11 +76,7 @@ public class VDCutsceneManager : MonoBehaviour
         Email.emailRecived = true; // Trigger the email notification
         isCutscene1Triggered = true;
 
-        // Display Cutscene 1 dialogues (if any)
-        if (cutscene1Data != null)
-        {
-            yield return StartCoroutine(DisplayDialogues(cutscene1Data));
-        }
+        NotificationManager.Instance.ShowNotification("New notification", 2f);
 
         Debug.Log("Cutscene 1: Email sent to player computer.");
     }

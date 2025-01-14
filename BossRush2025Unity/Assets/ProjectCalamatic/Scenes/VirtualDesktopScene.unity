@@ -1387,6 +1387,7 @@ GameObject:
   - component: {fileID: 437000523}
   - component: {fileID: 437000524}
   - component: {fileID: 437000525}
+  - component: {fileID: 437000526}
   m_Layer: 0
   m_Name: DesktopManager
   m_TagString: Untagged
@@ -1437,11 +1438,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emailManager: {fileID: 437000525}
   desktopManager: {fileID: 437000523}
-  playerCursorMovement: {fileID: 0}
   bossPrefab: {fileID: 6237181959383305334, guid: 2540c87b9ce825d4884b13449219d469, type: 3}
   bossSpawnPoint: {fileID: 839618125}
   errorMessagePrefab: {fileID: 6963359099788228555, guid: db5ecfc6acfa1c349bf4cd2c5f403e80, type: 3}
-  cutscene1Data: {fileID: 11400000, guid: 4d506a4d68fc07542be6891554f5c9a8, type: 2}
   cutscene2Data: {fileID: 11400000, guid: 7f8526134092eb845a3b8859c9ba0cc0, type: 2}
   cutscene3Data: {fileID: 11400000, guid: 1d7c14de33d9938499d025a5a4be8ba8, type: 2}
   emailDelay: 5
@@ -1460,7 +1459,22 @@ MonoBehaviour:
   recievedEmail1: {fileID: 2139382237}
   recievedEmail2: {fileID: 1442911824}
   emailNotify: {fileID: 9398760}
-  currentlyActivatedEmail: 0
+  isEmailViewed: 0
+--- !u!114 &437000526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437000521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 725a7fe1e43b3854bb0ef8ce6c264efa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notificationPrefab: {fileID: 6963359099788228555, guid: 0a4b70908aa3c5a4cae53722b79f907f, type: 3}
+  notificationSpawnPoint: {fileID: 3310477707210030431, guid: 0a4b70908aa3c5a4cae53722b79f907f, type: 3}
+  notificationDuration: 2
 --- !u!1 &509220323
 GameObject:
   m_ObjectHideFlags: 0
@@ -2696,7 +2710,6 @@ Transform:
   - {fileID: 1623567115}
   - {fileID: 171867478}
   - {fileID: 1856520672}
-  - {fileID: 1081815712}
   - {fileID: 2058959199}
   - {fileID: 1244167208}
   m_Father: {fileID: 0}
@@ -3238,12 +3251,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081815711}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.44, y: 0.013, z: 0}
-  m_LocalScale: {x: 0.023597915, y: 0.033711307, z: 0.033711307}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.1473, y: 0.01, z: 0}
+  m_LocalScale: {x: 0.019704496, y: 0.18766186, z: 0.028149279}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 834119012}
+  m_Father: {fileID: 1925311076}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1081815713
 BoxCollider2D:
@@ -3332,8 +3345,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1052415087
-  m_SortingLayer: 2
+  m_SortingLayerID: 830837883
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -3213956375228829941, guid: 0e39b3c4bd797e343a82664d1a8de2fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5664,6 +5677,7 @@ Transform:
   - {fileID: 1688338463}
   - {fileID: 1420184539}
   - {fileID: 420541734}
+  - {fileID: 1081815712}
   m_Father: {fileID: 834119012}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1925311077
@@ -5814,7 +5828,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370236cb635710246a3ba8c8c569b4c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCursor: {fileID: 0}
 --- !u!61 &2058959201
 BoxCollider2D:
   m_ObjectHideFlags: 0
