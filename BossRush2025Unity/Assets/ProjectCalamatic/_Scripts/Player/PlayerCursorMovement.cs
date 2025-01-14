@@ -1,30 +1,63 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCursorMovement : MonoBehaviour
 {
     public static PlayerCursorMovement Instance { get; private set; }
 
-    public bool isRequiredCutsceneEnded;
+    public bool isRequiredCutsceneEnded; // Determines if WASD movement is enabled
     public float moveSpeed = 5f; // Speed for WASD movement
     public float jumpForce = 5f; // Force for jumping
     private Camera mainCamera;
     private Vector2 minBounds; // Minimum camera bounds
     private Vector2 maxBounds; // Maximum camera bounds
-    private Rigidbody2D rb; // Rigidbody2D component for WASD movement
+    private Rigidbody2D rb; // Rigidbody2D for WASD movement
     private bool isGrounded = true; // Tracks if the cursor is grounded
 
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Destroy duplicate instances
             return;
         }
 
         Instance = this;
+        DontDestroyOnLoad(gameObject); // Prevent this object from being destroyed on scene load
     }
 
     private void Start()
+    {
+        InitializeCursor();
+    }
+
+    private void OnEnable()
+    {
+        // Listen to scene load events to reinitialize the camera
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        // Unsubscribe from scene load events
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void Update()
+    {
+        if (isRequiredCutsceneEnded)
+        {
+            EnableRigidbody2D(); // Ensure Rigidbody2D is enabled in WASD mode
+            HandleWASDMovement();
+        }
+        else
+        {
+            DisableRigidbody2D(); // Disable Rigidbody2D in mouse movement mode
+            HandleMouseMovement();
+        }
+    }
+
+    private void InitializeCursor()
     {
         mainCamera = Camera.main;
 
@@ -42,19 +75,15 @@ public class PlayerCursorMovement : MonoBehaviour
 
         // Calculate camera bounds
         CalculateCameraBounds();
-    }
 
-    private void Update()
-    {
+        // Apply the correct movement mode after initialization
         if (isRequiredCutsceneEnded)
         {
-            EnableRigidbody2D(); // Ensure Rigidbody2D is enabled in WASD mode
-            HandleWASDMovement();
+            EnableRigidbody2D();
         }
         else
         {
-            DisableRigidbody2D(); // Disable Rigidbody2D in mouse movement mode
-            HandleMouseMovement();
+            DisableRigidbody2D();
         }
     }
 
@@ -142,6 +171,8 @@ public class PlayerCursorMovement : MonoBehaviour
     private void CalculateCameraBounds()
     {
         // Calculate the camera's world bounds based on orthographic size and aspect ratio
+        if (mainCamera == null) return;
+
         float cameraHeight = 2f * mainCamera.orthographicSize;
         float cameraWidth = cameraHeight * mainCamera.aspect;
 
@@ -154,5 +185,10 @@ public class PlayerCursorMovement : MonoBehaviour
     public Vector2 GetCursorPosition()
     {
         return transform.position;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        InitializeCursor(); // Reinitialize the cursor for the new scene
     }
 }

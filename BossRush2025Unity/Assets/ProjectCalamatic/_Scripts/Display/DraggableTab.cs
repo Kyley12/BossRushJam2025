@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class DraggableTab : MonoBehaviour
 {
-    public PlayerCursorMovement playerCursor; // Reference to the player cursor
+    private PlayerCursorMovement playerCursor; // Reference to the player cursor
     private bool isDragging = false;
     private Vector3 offset;
 
     private void Start()
     {
-        if (playerCursor == null)
+        // Locate the PlayerCursorMovement instance dynamically if not assigned
+        if (PlayerCursorMovement.Instance != null)
         {
-            Debug.LogError("PlayerCursor reference is missing! Assign it in the Inspector.");
+            playerCursor = PlayerCursorMovement.Instance;
+        }
+        else
+        {
+            Debug.LogError("PlayerCursorMovement instance not found! Ensure it exists in the start scene.");
         }
     }
 

@@ -5,7 +5,6 @@ public class VDCutsceneManager : MonoBehaviour
 {
     public Email emailManager; // Reference to the Email script
     public DesktopManager desktopManager; // Reference to the DesktopManager script
-    public PlayerCursorMovement playerCursorMovement; // Reference to the PlayerCursorMovement script
     public GameObject bossPrefab; // Boss object to instantiate during Cutscene 2
     public Transform bossSpawnPoint; // Spawn point for the boss
     public GameObject errorMessagePrefab; // Error message prefab for boss's dialogue
@@ -22,25 +21,25 @@ public class VDCutsceneManager : MonoBehaviour
     private bool isCutscene2Ended = false;
     private bool isCutscene3Triggered = false;
 
+    private PlayerCursorMovement playerCursorMovement; // Reference to the player cursor
+
     private void Start()
     {
+        // Dynamically find the PlayerCursorMovement instance
+        AssignPlayerCursorMovement();
+
         // Start Cutscene 1 after the game starts
         StartCoroutine(StartCutscene1());
     }
 
-    private IEnumerator StartCutscene1()
+    private void OnEnable()
     {
-        yield return new WaitForSeconds(emailDelay);
-        Email.emailRecived = true; // Trigger the email notification
-        isCutscene1Triggered = true;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
-        // Display Cutscene 1 dialogues (if any)
-        if (cutscene1Data != null)
-        {
-            yield return StartCoroutine(DisplayDialogues(cutscene1Data));
-        }
-
-        Debug.Log("Cutscene 1: Email sent to player computer.");
+    private void OnDisable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Update()
@@ -71,6 +70,21 @@ public class VDCutsceneManager : MonoBehaviour
                !desktopManager.emailTab.activeInHierarchy &&
                emailManager != null &&
                emailManager.IsEmailViewed();
+    }
+
+    private IEnumerator StartCutscene1()
+    {
+        yield return new WaitForSeconds(emailDelay);
+        Email.emailRecived = true; // Trigger the email notification
+        isCutscene1Triggered = true;
+
+        // Display Cutscene 1 dialogues (if any)
+        if (cutscene1Data != null)
+        {
+            yield return StartCoroutine(DisplayDialogues(cutscene1Data));
+        }
+
+        Debug.Log("Cutscene 1: Email sent to player computer.");
     }
 
     private IEnumerator StartCutscene2()
@@ -129,5 +143,21 @@ public class VDCutsceneManager : MonoBehaviour
             yield return new WaitForSeconds(2f); // Wait for the dialogue to be displayed
             Destroy(errorMessage); // Destroy the error message after it is displayed
         }
+    }
+
+    private void AssignPlayerCursorMovement()
+    {
+        // Dynamically find the PlayerCursorMovement instance
+        playerCursorMovement = PlayerCursorMovement.Instance;
+
+        if (playerCursorMovement == null)
+        {
+            Debug.LogError("PlayerCursorMovement instance not found! Ensure the PlayerCursor is properly set in the scene.");
+        }
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        AssignPlayerCursorMovement(); // Reassign PlayerCursorMovement on scene load
     }
 }
