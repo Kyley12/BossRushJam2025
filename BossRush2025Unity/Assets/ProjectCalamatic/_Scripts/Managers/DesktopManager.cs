@@ -23,6 +23,7 @@ public class DesktopManager : MonoBehaviour
         {
             emailTab.SetActive(true);
             isEmailTabActive = true;
+            NotificationManager.Instance.HideNotification();
         }
     }
 
