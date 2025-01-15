@@ -1635,6 +1635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81fd372a5f7acf46b12af7e892378e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endingSO: {fileID: 11400000, guid: 8871ee3d6a3f40849b2c55757e313a4f, type: 2}
   emailTab: {fileID: 2058959197}
   startTab: {fileID: 1244167207}
   myComputerTab: {fileID: 33265961}

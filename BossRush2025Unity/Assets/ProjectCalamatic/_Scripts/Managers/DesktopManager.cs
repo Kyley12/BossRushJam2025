@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DesktopManager : MonoBehaviour
 {
+    public EndingSO endingSO;
+
     private bool isEmailTabActive;
     public GameObject emailTab;
     public GameObject startTab;
@@ -49,7 +52,8 @@ public class DesktopManager : MonoBehaviour
 
     public void OnShutDownButtonPressed()
     {
-        Application.Quit();
+        endingSO.currentEnding = Endings.Shutdowned;
+        SceneManager.LoadScene("Ending");
     }
 
     private void SetAllTabToDefault()
