@@ -10,6 +10,9 @@ public class DesktopManager : MonoBehaviour
     public GameObject myComputerTab;
     private bool isMyComputerActive;
 
+    public GameObject finderTab;
+    private bool isFinderActive;
+
     private void Awake()
     {
         SetAllTabToDefault();
@@ -66,6 +69,20 @@ public class DesktopManager : MonoBehaviour
         {
             myComputerTab.SetActive(true);
             isMyComputerActive = true;
+        }
+    }
+
+    public void OnFinderPressed()
+    {
+        if(isFinderActive)
+        {
+            finderTab.SetActive(false);
+            isFinderActive = false;
+        }
+        else
+        {
+            finderTab.SetActive(true);
+            isFinderActive = true;
         }
     }
 }

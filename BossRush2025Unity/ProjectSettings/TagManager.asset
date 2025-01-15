@@ -7,6 +7,7 @@ TagManager:
   - Notify
   - Safezone
   - PlayerHPText
+  - CounterRange
   layers:
   - Default
   - TransparentFX
