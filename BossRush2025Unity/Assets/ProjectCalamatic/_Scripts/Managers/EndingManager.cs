@@ -9,6 +9,8 @@ public class EndingManager : MonoBehaviour
     private void Start()
     {
         shutdownEnding.SetActive(false);
+        PlayerCursorMovement.Instance.isRequiredCutsceneEnded = false;
+        PlayerCursorMovement.Instance.playerHPText.SetActive(false);
     }
 
     private void Update()
