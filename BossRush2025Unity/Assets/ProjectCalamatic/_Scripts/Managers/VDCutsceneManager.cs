@@ -11,15 +11,20 @@ public class VDCutsceneManager : MonoBehaviour
     public GameObject errorMessagePrefab; // Error message prefab for boss's dialogue
     public CutsceneDataSO cutscene2Data; // Dialogues for Cutscene 2
     public CutsceneDataSO cutscene3Data; // Dialogues for Cutscene 3
+    public CutsceneDataSO cutscene4Data;
     public float emailDelay = 5f; // Delay for sending the email in seconds
+    public GameObject recycleBinIcon; // Reference to the Recycle Bin icon
 
     private bool isCutscene1Triggered = false;
     private bool isCutscene1Ended = false;
     private bool isCutscene2Triggered = false;
     private bool isCutscene2Ended = false;
     private bool isCutscene3Triggered = false;
+    private bool isCutscene3Ended = false;
+    private bool isCutscene4Triggered = false;
 
     private PlayerCursorMovement playerCursorMovement; // Reference to the player cursor
+    private Vector3 bossInitialPosition; // Boss's initial position
 
     private void Start()
     {
@@ -58,6 +63,11 @@ public class VDCutsceneManager : MonoBehaviour
         if (isCutscene2Ended && !isCutscene3Triggered)
         {
             StartCoroutine(StartCutscene3());
+        }
+
+         if (isCutscene3Ended && !isCutscene4Triggered)
+        {
+            StartCoroutine(StartCutscene4());
         }
     }
 
@@ -118,6 +128,65 @@ public class VDCutsceneManager : MonoBehaviour
             playerCursorMovement.isRequiredCutsceneEnded = true;
             playerCursorMovement.playerHPText.SetActive(true);
             Debug.Log("Cutscene 3: Player cursor movement changed.");
+        }
+
+        isCutscene3Ended = true;
+    }
+
+     private IEnumerator StartCutscene4()
+    {
+        isCutscene4Triggered = true;
+
+        // Ensure the boss and recycle bin icon are set
+        if (bossPrefab == null || recycleBinIcon == null)
+        {
+            Debug.LogError("Boss or Recycle Bin Icon not set!");
+            yield break;
+        }
+
+        GameObject boss = GameObject.FindWithTag("Boss");
+        if (boss == null)
+        {
+            Debug.LogError("Boss not found in the scene!");
+            yield break;
+        }
+
+        bossInitialPosition = boss.transform.position;
+
+        // Move the boss to the recycle bin
+        yield return MoveToPosition(boss, recycleBinIcon.transform.position);
+
+        // Simulate picking up the recycle bin
+        Debug.Log("Boss picked up the Recycle Bin!");
+        recycleBinIcon.SetActive(false); // Hide the recycle bin icon
+
+        // Move the boss back to its initial position
+        yield return MoveToPosition(boss, bossInitialPosition);
+
+        // Display dialogues for Cutscene 4
+        if (cutscene4Data != null)
+        {
+            yield return StartCoroutine(DisplayDialogues(cutscene4Data));
+        }
+
+        // Start the boss AI behavior
+        var bossAI = boss.GetComponent<BossAI>();
+        if (bossAI != null)
+        {
+            bossAI.enabled = true; // Enable the Boss AI
+            Debug.Log("Boss AI started.");
+        }
+
+        Debug.Log("Cutscene 4 completed!");
+    }
+
+    private IEnumerator MoveToPosition(GameObject obj, Vector3 targetPosition)
+    {
+        float speed = 2f; // Adjust movement speed
+        while (Vector3.Distance(obj.transform.position, targetPosition) > 0.1f)
+        {
+            obj.transform.position = Vector3.MoveTowards(obj.transform.position, targetPosition, speed * Time.deltaTime);
+            yield return null;
         }
     }
 

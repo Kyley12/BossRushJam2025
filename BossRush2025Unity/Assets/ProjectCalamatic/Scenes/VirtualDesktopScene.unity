@@ -1659,7 +1659,9 @@ MonoBehaviour:
   errorMessagePrefab: {fileID: 6963359099788228555, guid: db5ecfc6acfa1c349bf4cd2c5f403e80, type: 3}
   cutscene2Data: {fileID: 11400000, guid: 7f8526134092eb845a3b8859c9ba0cc0, type: 2}
   cutscene3Data: {fileID: 11400000, guid: 1d7c14de33d9938499d025a5a4be8ba8, type: 2}
+  cutscene4Data: {fileID: 11400000, guid: f82690c54912054419dfe403e84b6a80, type: 2}
   emailDelay: 5
+  recycleBinIcon: {fileID: 1623567114}
 --- !u!114 &437000525
 MonoBehaviour:
   m_ObjectHideFlags: 0

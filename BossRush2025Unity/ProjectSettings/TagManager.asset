@@ -8,6 +8,7 @@ TagManager:
   - Safezone
   - PlayerHPText
   - CounterRange
+  - Boss
   layers:
   - Default
   - TransparentFX
