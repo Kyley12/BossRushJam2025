@@ -7,6 +7,9 @@ public class DesktopManager : MonoBehaviour
     public GameObject startTab;
     private bool isStartTabActive;
 
+    public GameObject myComputerTab;
+    private bool isMyComputerActive;
+
     private void Awake()
     {
         SetAllTabToDefault();
@@ -50,5 +53,19 @@ public class DesktopManager : MonoBehaviour
     {
         emailTab.SetActive(false);
         startTab.SetActive(false);
+    }
+
+    public void OnMyComputerPressed()
+    {
+        if(isMyComputerActive)
+        {
+            myComputerTab.SetActive(false);
+            isMyComputerActive = false;
+        }
+        else
+        {
+            myComputerTab.SetActive(true);
+            isMyComputerActive = true;
+        }
     }
 }

@@ -15,9 +15,12 @@ public enum ItemType
     antivirus,
     key
 }
+
 [CreateAssetMenu(fileName = "FolderSO", menuName = "Scriptable Objects/FolderSO")]
 public class FolderSO : ScriptableObject
 {
+    public string folderName;
+    public bool isGameOverWhenDeleted;
     public FolderStates currFolderState;
     public List<FolderItems> folderItems;
 }

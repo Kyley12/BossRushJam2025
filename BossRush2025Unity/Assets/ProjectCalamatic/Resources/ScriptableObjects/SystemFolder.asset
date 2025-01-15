@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2567dd1dea6671142a2c68c7f47f3fee, type: 3}
   m_Name: SystemFolder
   m_EditorClassIdentifier: 
-  folderName: 
-  currFolderState: 0
-  folderItems: []
+  folderName: System
+  isGameOverWhenDeleted: 1
+  currFolderState: 2
+  folderItems:
+  - itemName: AntiVirus
+    itemType: 1

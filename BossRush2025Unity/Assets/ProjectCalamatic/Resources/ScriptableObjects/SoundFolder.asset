@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2567dd1dea6671142a2c68c7f47f3fee, type: 3}
-  m_Name: ImageFolder
+  m_Name: SoundFolder
   m_EditorClassIdentifier: 
-  folderName: Image
-  isGameOverWhenDeleted: 1
+  folderName: Sound
+  isGameOverWhenDeleted: 0
   currFolderState: 2
   folderItems: []

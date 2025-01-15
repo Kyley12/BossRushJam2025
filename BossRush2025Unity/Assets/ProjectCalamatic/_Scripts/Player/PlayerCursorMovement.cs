@@ -8,11 +8,13 @@ public class PlayerCursorMovement : MonoBehaviour
     public bool isRequiredCutsceneEnded; // Determines if WASD movement is enabled
     public float moveSpeed = 5f; // Speed for WASD movement
     public float jumpForce = 5f; // Force for jumping
+    private int jumpCount = 0; // Tracks the number of jumps performed
+    private int maxJumps = 2; // Maximum number of jumps allowed
     private Camera mainCamera;
     private Vector2 minBounds; // Minimum camera bounds
     private Vector2 maxBounds; // Maximum camera bounds
     private Rigidbody2D rb; // Rigidbody2D for WASD movement
-    private bool isGrounded = true; // Tracks if the cursor is grounded
+
     public GameObject playerHPText;
 
     private void Awake()
@@ -121,10 +123,10 @@ public class PlayerCursorMovement : MonoBehaviour
         rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
 
         // Check for jump with W key
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.W) && jumpCount < maxJumps)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            isGrounded = false; // Cursor is no longer grounded
+            jumpCount++; // Increment the jump count
         }
 
         // Prevent downward movement (disable S key functionality)
@@ -156,8 +158,13 @@ public class PlayerCursorMovement : MonoBehaviour
         {
             Destroy(rb); // Remove Rigidbody2D when not in WASD mode
             rb = null;
-            isGrounded = true; // Reset grounded state
+            ResetJumpState(); // Reset jump count when switching modes
         }
+    }
+
+    private void ResetJumpState()
+    {
+        jumpCount = 0; // Reset jump count when switching modes
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -165,7 +172,7 @@ public class PlayerCursorMovement : MonoBehaviour
         // Detect collision with ground
         if (collision.contacts[0].normal.y > 0.5f)
         {
-            isGrounded = true; // Cursor is grounded
+            jumpCount = 0; // Reset jump count when grounded
         }
     }
 

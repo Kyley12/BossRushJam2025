@@ -11,9 +11,6 @@ public class VDCutsceneManager : MonoBehaviour
     public GameObject errorMessagePrefab; // Error message prefab for boss's dialogue
     public CutsceneDataSO cutscene2Data; // Dialogues for Cutscene 2
     public CutsceneDataSO cutscene3Data; // Dialogues for Cutscene 3
-
-    public TextMeshProUGUI playerHPText;
-
     public float emailDelay = 5f; // Delay for sending the email in seconds
 
     private bool isCutscene1Triggered = false;
