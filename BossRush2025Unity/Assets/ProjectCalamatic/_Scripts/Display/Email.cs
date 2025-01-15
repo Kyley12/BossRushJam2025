@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class Email : MonoBehaviour
 {
-    public GameObject recievedEmail1;   // Email 1 object
-    public GameObject recievedEmail2;   // Email 2 object
+    public GameObject recievedEmail;   // Email 1 object
     public GameObject emailNotify;     // Notification mark object on the email
     public bool isEmailViewed = false;
 
@@ -26,13 +25,9 @@ public class Email : MonoBehaviour
             // Activate the appropriate email object
             if (currentlyActivatedEmail == 0)
             {
-                recievedEmail1.SetActive(true);
+                recievedEmail.SetActive(true);
             }
-            else if (currentlyActivatedEmail == 1)
-            {
-                recievedEmail2.SetActive(true);
-            }
-            else if (currentlyActivatedEmail > 2)
+            else if (currentlyActivatedEmail > 1)
             {
                 return; // No more emails to activate
             }

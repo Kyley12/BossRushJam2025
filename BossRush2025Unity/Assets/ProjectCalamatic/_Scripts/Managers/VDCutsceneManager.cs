@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class VDCutsceneManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class VDCutsceneManager : MonoBehaviour
     public GameObject errorMessagePrefab; // Error message prefab for boss's dialogue
     public CutsceneDataSO cutscene2Data; // Dialogues for Cutscene 2
     public CutsceneDataSO cutscene3Data; // Dialogues for Cutscene 3
+
+    public TextMeshProUGUI playerHPText;
 
     public float emailDelay = 5f; // Delay for sending the email in seconds
 
@@ -116,6 +119,7 @@ public class VDCutsceneManager : MonoBehaviour
         if (playerCursorMovement != null)
         {
             playerCursorMovement.isRequiredCutsceneEnded = true;
+            playerCursorMovement.playerHPText.SetActive(true);
             Debug.Log("Cutscene 3: Player cursor movement changed.");
         }
     }

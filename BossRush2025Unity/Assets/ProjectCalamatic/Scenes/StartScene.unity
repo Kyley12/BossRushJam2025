@@ -1156,6 +1156,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCursor
       objectReference: {fileID: 0}
+    - target: {fileID: 7445977648435345189, guid: e34bfd43c3c7d594784cacf62b51d752, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8266252357238648752, guid: e34bfd43c3c7d594784cacf62b51d752, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.44
@@ -1196,6 +1200,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8341521152140084589, guid: e34bfd43c3c7d594784cacf62b51d752, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8511444818598905067, guid: e34bfd43c3c7d594784cacf62b51d752, type: 3}
+      propertyPath: playerHPText
+      value: 
+      objectReference: {fileID: 1642968692}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2080,6 +2092,11 @@ PrefabInstance:
 Camera:
   m_CorrespondingSourceObject: {fileID: 1580036393547943697, guid: c155333fd3c3e674aadab6ea0163de93, type: 3}
   m_PrefabInstance: {fileID: 1574029712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1642968692 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8341521152140084589, guid: e34bfd43c3c7d594784cacf62b51d752, type: 3}
+  m_PrefabInstance: {fileID: 681784088}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1654202087
 GameObject:

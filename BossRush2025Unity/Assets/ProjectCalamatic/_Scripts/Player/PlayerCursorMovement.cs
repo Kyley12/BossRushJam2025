@@ -13,6 +13,7 @@ public class PlayerCursorMovement : MonoBehaviour
     private Vector2 maxBounds; // Maximum camera bounds
     private Rigidbody2D rb; // Rigidbody2D for WASD movement
     private bool isGrounded = true; // Tracks if the cursor is grounded
+    public GameObject playerHPText;
 
     private void Awake()
     {

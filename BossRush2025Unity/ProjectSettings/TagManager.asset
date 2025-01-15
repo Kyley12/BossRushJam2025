@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Notify
   - Safezone
+  - PlayerHPText
   layers:
   - Default
   - TransparentFX
