@@ -106,7 +106,7 @@ public class FortuneWheel : MonoBehaviour
             {
                 Debug.LogError("Selected segment does not have a FolderSegment component.");
             }
-        }
+        }  
         else
         {
             Debug.LogError("No valid segment detected.");
