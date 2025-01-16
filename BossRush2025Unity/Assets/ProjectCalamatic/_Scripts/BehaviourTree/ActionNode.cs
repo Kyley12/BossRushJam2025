@@ -58,7 +58,7 @@ public class ActionNode : TreeNode
             // Randomly decide to halt after reaching this target
             if (Random.value < 0.3f) // 30% chance to halt after reaching the target
             {
-                haltDuration = Random.Range(1f, 3f); // Halt for 1-3 seconds
+                haltDuration = Random.Range(0.1f, 1f); // Halt for 1-3 seconds
                 isHalted = true;
                 Debug.Log($"Boss halts for {haltDuration} seconds.");
             }

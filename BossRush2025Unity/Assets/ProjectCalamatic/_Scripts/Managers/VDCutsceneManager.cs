@@ -22,6 +22,7 @@ public class VDCutsceneManager : MonoBehaviour
     private bool isCutscene3Triggered = false;
     private bool isCutscene3Ended = false;
     private bool isCutscene4Triggered = false;
+    public static bool isCutscene4Ended = false;
 
     private PlayerCursorMovement playerCursorMovement; // Reference to the player cursor
     private Vector3 bossInitialPosition; // Boss's initial position
@@ -178,6 +179,7 @@ public class VDCutsceneManager : MonoBehaviour
         }
 
         Debug.Log("Cutscene 4 completed!");
+        isCutscene4Ended = true;
     }
 
     private IEnumerator MoveToPosition(GameObject obj, Vector3 targetPosition)
