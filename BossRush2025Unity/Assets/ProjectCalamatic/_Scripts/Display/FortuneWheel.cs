@@ -8,15 +8,17 @@ public class FortuneWheel : MonoBehaviour
     public float spinDuration = 3f; // Duration of the spin
     public float maxSpinSpeed = 500f; // Maximum speed of the spin
     public FolderSO selectedFolder { get; private set; } // The selected folder after spinning
-    public LayerMask segmentLayerMask; // LayerMask for valid segment detection
+    public BattleHandler battleHandler; // Reference to the battle handler
 
     private bool isSpinning = false; // Track if the wheel is spinning
-    private Collider2D[] segmentColliders; // Store segment colliders for quick access
+    private Collider2D[] segmentColliders; // Store all segment colliders
+    private float segmentAngle; // Angle covered by each segment
 
     private void Start()
     {
-        // Initialize the active segments
         RefreshActiveSegments();
+        segmentAngle = 360f / segmentColliders.Length;
+        AlignToFirstSegment();
     }
 
     public IEnumerator SpinWheel()
@@ -27,21 +29,18 @@ public class FortuneWheel : MonoBehaviour
             yield break;
         }
 
-        if (segmentColliders.Length == 0)
-        {
-            Debug.LogError("No active segments to choose from!");
-            yield break;
-        }
-
         isSpinning = true;
+
+        // Add random starting rotation in multiples of segment angle
+        AlignToFirstSegment();
+        float randomOffset = Random.Range(0, segmentColliders.Length) * segmentAngle;
+        wheelBase.Rotate(Vector3.back, randomOffset);
+        Debug.Log($"Random starting rotation: {randomOffset} degrees.");
 
         float elapsedTime = 0f;
         float currentSpeed = maxSpinSpeed;
 
-        // Calculate the random target rotation
-        float randomAngle = Random.Range(0f, 360f);
-        float totalRotation = 360f * 3 + randomAngle; // Add full rotations for visual effect
-
+        // Perform the spin
         while (elapsedTime < spinDuration)
         {
             float spinStep = currentSpeed * Time.deltaTime;
@@ -55,72 +54,104 @@ public class FortuneWheel : MonoBehaviour
             yield return null;
         }
 
-        // Snap to the closest valid segment
+        // Snap to the closest valid segment after spinning
         AlignWithClosestSegment();
 
         // Detect the selected segment
-        DetectSelectedSegment();
+        while (!DetectSelectedSegment())
+        {
+            // Spin slightly if no valid segment is found
+            yield return new WaitForSeconds(0.1f); // Small delay for readability
+            wheelBase.Rotate(Vector3.back, 10f); // Rotate slightly to find a valid segment
+        }
 
         isSpinning = false;
+
+        // Check if all folders are deactivated
+        if (CheckAllFoldersDeactivated())
+        {
+            Debug.Log("All folders deactivated. Battle ends.");
+            battleHandler.EndBattle();
+        }
+    }
+
+    private void AlignToFirstSegment()
+    {
+        wheelBase.eulerAngles = Vector3.zero; // Align to the first segment
+        Debug.Log($"Wheel aligned to the first segment.");
     }
 
     private void AlignWithClosestSegment()
     {
         float currentAngle = wheelBase.eulerAngles.z % 360f;
 
-        // Calculate the closest angle for a valid segment
-        float segmentAngle = 360f / segmentColliders.Length;
+        // Calculate the closest angle that aligns with a segment
         float closestAngle = Mathf.Round(currentAngle / segmentAngle) * segmentAngle;
 
-        // Align the wheel to the closest valid angle
+        // Snap the wheel to the closest valid angle
         wheelBase.eulerAngles = new Vector3(0, 0, closestAngle);
         Debug.Log($"Wheel aligned to {closestAngle} degrees.");
     }
 
-    private void DetectSelectedSegment()
+    private bool DetectSelectedSegment()
     {
         Vector3 localPointerPosition = wheelBase.InverseTransformPoint(pointer.position);
         float angle = Mathf.Atan2(localPointerPosition.y, localPointerPosition.x) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360f;
 
-        float segmentAngle = 360f / segmentColliders.Length; // Each segment's angle
-        int segmentIndex = Mathf.FloorToInt(angle / segmentAngle);
+        int segmentIndex = Mathf.FloorToInt((angle + (segmentAngle / 2)) % 360f / segmentAngle);
+
+        Debug.Log($"Pointer Angle: {angle}, Calculated Segment Index: {segmentIndex}");
 
         if (segmentIndex >= 0 && segmentIndex < segmentColliders.Length)
         {
-            Collider2D selectedCollider = segmentColliders[segmentIndex];
-            FolderSegment folderSegment = selectedCollider.GetComponent<FolderSegment>();
+            Collider2D collider = segmentColliders[segmentIndex];
 
-            if (folderSegment != null)
+            if (collider != null)
             {
-                selectedFolder = folderSegment.associatedFolder;
-                Debug.Log($"Selected folder: {selectedFolder.folderName}");
+                Debug.Log($"Pointer detected: Collider Name: {collider.name}, Active: {collider.gameObject.activeSelf}");
 
-                // Deactivate the selected segment
-                selectedCollider.gameObject.SetActive(false);
+                if (collider.gameObject.activeSelf)
+                {
+                    FolderSegment folderSegment = collider.GetComponent<FolderSegment>();
 
-                // Refresh active segments
-                RefreshActiveSegments();
+                    if (folderSegment != null)
+                    {
+                        selectedFolder = folderSegment.associatedFolder;
+                        selectedFolder.currFolderState = FolderStates.inDanger;
+                        collider.gameObject.SetActive(false); // Deactivate the segment
+                        Debug.Log($"Selected Folder: {selectedFolder.folderName}");
+                        return true; // Valid segment found
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Collider {collider.name} does not have a FolderSegment script. Continuing spin.");
+                        return false; // Invalid segment, continue spinning
+                    }
+                }
             }
-            else
-            {
-                Debug.LogError("Selected segment does not have a FolderSegment component.");
-            }
-        }  
-        else
-        {
-            Debug.LogError("No valid segment detected.");
         }
+
+        Debug.LogWarning("No valid segment detected. Pointer landed on an inactive or invalid segment.");
+        return false; // Invalid segment, continue spinning
     }
 
     private void RefreshActiveSegments()
     {
-        // Update the list of active segment colliders
         segmentColliders = wheelBase.GetComponentsInChildren<Collider2D>(true);
 
         if (segmentColliders.Length == 0)
         {
             Debug.LogWarning("No active segments left! All folders have been chosen.");
         }
+    }
+
+    private bool CheckAllFoldersDeactivated()
+    {
+        foreach (var segmentCollider in segmentColliders)
+        {
+            if (segmentCollider.gameObject.activeSelf) return false;
+        }
+        return true; // All segments are deactivated
     }
 }

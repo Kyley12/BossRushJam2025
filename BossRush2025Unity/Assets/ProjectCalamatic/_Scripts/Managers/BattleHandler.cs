@@ -18,9 +18,17 @@ public class BattleHandler : MonoBehaviour
     private FolderSO chosenFolder; // Folder chosen by the wheel spin
     private Coroutine turnTimer; // Coroutine reference for turn timer
 
+    public TextMeshProUGUI timerText;
+    public float timer;
+
     private void Start()
     {
         StartCoroutine(WaitForCutsceneAndStartBattle());
+    }
+
+    private void Update()
+    {
+        DisplayTimer();
     }
 
     private IEnumerator WaitForCutsceneAndStartBattle()
@@ -98,7 +106,7 @@ public class BattleHandler : MonoBehaviour
 
     private IEnumerator TurnTimer()
     {
-        float timer = 0f;
+        timer = 0f;
 
         while (timer < turnTimeLimit)
         {
@@ -156,6 +164,16 @@ public class BattleHandler : MonoBehaviour
         // End the boss's stun
         isBossStunned = false;
         Debug.Log("Boss is no longer stunned!");
+    }
+
+    private void DisplayTimer()
+    {
+        timerText.text = $"{timer}";
+    }
+
+    public void EndBattle()
+    {
+
     }
     
 }

@@ -33,7 +33,6 @@ public class ActionNode : TreeNode
                 // End the halt
                 isHalted = false;
                 haltTimer = 0f;
-                Debug.Log("Boss resumes movement.");
             }
             else
             {
@@ -60,7 +59,6 @@ public class ActionNode : TreeNode
             {
                 haltDuration = Random.Range(0.1f, 1f); // Halt for 1-3 seconds
                 isHalted = true;
-                Debug.Log($"Boss halts for {haltDuration} seconds.");
             }
         }
 
