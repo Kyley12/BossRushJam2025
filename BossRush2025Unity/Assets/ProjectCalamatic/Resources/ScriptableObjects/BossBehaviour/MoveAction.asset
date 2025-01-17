@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb861a2b2ef933643b0301fb3496f8f9, type: 3}
-  m_Name: SequenceNode
+  m_Script: {fileID: 11500000, guid: f1f8c4c4269d6df4e98d4db20adbf112, type: 3}
+  m_Name: MoveAction
   m_EditorClassIdentifier: 
-  children:
-  - {fileID: 11400000, guid: 892c8e0572b771242aadab530c8b1e9f, type: 2}
-  - {fileID: 11400000, guid: ea94b384b8820cf4b821e1db6e6b9927, type: 2}
+  actionName: MoveRandomly

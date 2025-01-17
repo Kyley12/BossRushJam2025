@@ -75,7 +75,6 @@ public class SpriteButton : MonoBehaviour
 
     private void OnClick()
     {
-        Debug.Log($"Button Clicked: {gameObject.name}");
 
         // Change to clicked sprite temporarily
         if (clickedSprite != null)

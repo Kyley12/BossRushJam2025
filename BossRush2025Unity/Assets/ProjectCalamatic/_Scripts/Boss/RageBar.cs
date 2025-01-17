@@ -2,20 +2,19 @@ using UnityEngine;
 
 public class RageBar : MonoBehaviour
 {
-    public int maxRage = 100; // Maximum rage value
-    public int currentRage = 0; // Current rage value
+    public BossStatSo bossStat;
     public GameObject boss; // Reference to the boss object
 
     public void IncreaseRage()
     {
-        currentRage += 20; // Increase rage by a fixed amount
-        if (currentRage >= maxRage)
+        bossStat.bossCurrRage += 20; // Increase rage by a fixed amount
+        if (bossStat.bossCurrRage >= bossStat.bossRagebarMax)
         {
-            currentRage = maxRage;
+            bossStat.bossCurrRage = bossStat.bossRagebarMax;
             TransformBoss(); // Change the boss's appearance
         }
 
-        Debug.Log($"Rage increased! Current rage: {currentRage}");
+        Debug.Log($"Rage increased! Current rage: {bossStat.bossCurrRage}");
     }
 
     private void TransformBoss()
