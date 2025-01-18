@@ -17,6 +17,8 @@ public class PlayerCursorMovement : MonoBehaviour
 
     public GameObject playerHPText;
 
+    public static bool isDeflectKeyPressed;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -129,10 +131,13 @@ public class PlayerCursorMovement : MonoBehaviour
             jumpCount++; // Increment the jump count
         }
 
-        // Prevent downward movement (disable S key functionality)
-        if (rb.linearVelocity.y < 0 && Input.GetKey(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
+            isDeflectKeyPressed = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            isDeflectKeyPressed = false;
         }
 
         // Clamp the position within the camera bounds

@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14eff0ce7ef3964f94402dcbee054ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStat: {fileID: 11400000, guid: 90a2ddd85c3517b408fdfcbfc5c18ccd, type: 2}
   bulletPattern:
     bulletType: 0
     bulletsAmount: 0
@@ -154,4 +155,4 @@ MonoBehaviour:
     startAngle: 0
     endAngle: 0
   websiteBulletDataSO: {fileID: 11400000, guid: 48749391461dada4681f97b66b4aa47f, type: 2}
-  moveSpeed: 20
+  moveSpeed: 10

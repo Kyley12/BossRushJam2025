@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patterns:
   - bulletType: 1
-    bulletsAmount: 20
+    bulletsAmount: 10
     fireRate: 0.001
     startAngle: 90
     endAngle: 270
   - bulletType: 0
     bulletsAmount: 1
     fireRate: 0.001
-    startAngle: 0
-    endAngle: 180
+    startAngle: 180
+    endAngle: 270
   - bulletType: 2
     bulletsAmount: 1
     fireRate: 0.001

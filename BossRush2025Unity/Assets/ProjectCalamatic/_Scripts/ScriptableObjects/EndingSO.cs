@@ -4,8 +4,8 @@ public enum Endings
 {
     Shutdowned,
     ShutdownedDuringGamePlay,
-    ImageDeleted,
-    SystemDeleted
+    Image,
+    System
 }
 
 [CreateAssetMenu(fileName = "EndingSO", menuName = "Scriptable Objects/EndingSO")]

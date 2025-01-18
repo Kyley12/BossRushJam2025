@@ -9,28 +9,25 @@ public class DeflectableBullet : MonoBehaviour
     public float moveSpeed = 20f;
     private bool isDeflected = false; // Whether the bullet has been deflected
 
+    private Camera mainCamera;
+
+    public PlayerStatSO playerStat;
+
     private void Start()
     {
-        // Ensure only one deflectable bullet exists at a time
-        if (FindObjectsOfType<DeflectableBullet>().Length > 1)
-        {
-            Destroy(gameObject);
-        }
-
+        mainCamera = Camera.main;
         SetInitialDirection();
     }
 
     private void Update()
     {
-        // Dynamically update the direction if not deflected
-        if (!isDeflected && PlayerCursorMovement.Instance != null)
-        {
-            Vector2 playerPosition = PlayerCursorMovement.Instance.GetCursorPosition();
-            moveDirection = (playerPosition - (Vector2)transform.position).normalized;
-        }
-
         // Move the bullet
         transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
+
+        if(!IsWithinCameraBounds())
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -55,19 +52,34 @@ public class DeflectableBullet : MonoBehaviour
             moveDirection = (playerPosition - (Vector2)transform.position).normalized;
         }
     }
+    private bool IsWithinCameraBounds()
+    {
+        Vector3 screenPoint = mainCamera.WorldToViewportPoint(transform.position);
+        return screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             // Bullet is deflected
-            isDeflected = true;
-            moveDirection = -moveDirection; // Reverse the direction
+            if (PlayerCursorMovement.isDeflectKeyPressed)
+            {
+                Debug.Log("Deflected Bullet");
+                isDeflected = true;
+                moveDirection = -moveDirection;
+            }
+            else
+            {
+                playerStat.DecreaseHealth(2f);
+                gameObject.SetActive(false);
+            }
         }
         else if (collision.gameObject.CompareTag("Boss") && isDeflected)
         {
             // Decrease the boss's stun bar
-            bossStats.bossStunbarHealth -= bulletPattern.bulletsAmount;
+            Debug.Log("Boss got hit!");
+            bossStats.bossStunbarHealth -= 20f;
             if (bossStats.bossStunbarHealth < 0)
                 bossStats.bossStunbarHealth = 0;
 

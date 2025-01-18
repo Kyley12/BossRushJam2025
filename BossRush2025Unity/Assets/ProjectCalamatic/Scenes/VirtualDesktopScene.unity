@@ -1943,8 +1943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78205813cd16ebd4daf06411a27a7920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRage: 100
-  currentRage: 0
+  bossStat: {fileID: 11400000, guid: 6f65ec4855f7d1443ae24a5445129839, type: 2}
   boss: {fileID: 6237181959383305334, guid: 2540c87b9ce825d4884b13449219d469, type: 3}
 --- !u!114 &437000529
 MonoBehaviour:
@@ -1967,6 +1966,7 @@ MonoBehaviour:
   cutsceneManager: {fileID: 437000524}
   timerText: {fileID: 690816689}
   timer: 0
+  playerStat: {fileID: 11400000, guid: 90a2ddd85c3517b408fdfcbfc5c18ccd, type: 2}
 --- !u!1 &488746646
 GameObject:
   m_ObjectHideFlags: 0

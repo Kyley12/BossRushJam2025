@@ -101,19 +101,21 @@ public class ActionNode : TreeNode
 
         if (fireTimer >= pattern.fireRate)
         {
-            Debug.Log("Ready to fire bullets");
             SelectBulletTypeAndPattern();
             FirePattern(bossAI);
+            BulletPool.bulletPoolInstance.ClearPool();
             fireTimer = 0f;
             return true;
         }
+
+
 
         return false;
     }
 
     private void SelectBulletTypeAndPattern()
     {
-        currentBulletType = (BulletType)Random.Range(0, System.Enum.GetValues(typeof(BulletType)).Length);
+        currentBulletType = (BulletType)Random.Range(0, 3);
         Debug.Log($"Selected BulletType: {currentBulletType}");
 
         var patterns = bossPatterns.GetPatterns(currentBulletType);
@@ -138,10 +140,10 @@ public class ActionNode : TreeNode
             return;
         }
 
-        float angleStep = (pattern.endAngle - pattern.startAngle) / pattern.bulletsAmount;
+        float angleStep = (pattern.endAngle - pattern.startAngle) / (pattern.bulletsAmount - 1);
         float angle = pattern.startAngle;
 
-        for (int i = 0; i <= pattern.bulletsAmount; i++)
+        for (int i = 0; i < pattern.bulletsAmount; i++)
         {
             float bulletDirectionX = bossAI.transform.position.x + Mathf.Sin((angle * Mathf.PI) / 180f);
             float bulletDirectionY = bossAI.transform.position.y + Mathf.Cos((angle * Mathf.PI) / 180f);
@@ -167,7 +169,7 @@ public class ActionNode : TreeNode
                     bullet.GetComponent<NormalBullet>().Initialize(pattern, bulletDirection);
                     break;
                 case BulletType.Website:
-                    bullet.GetComponent<WebsiteBullet>().Initialize(pattern, bulletDirection, websiteBulletDataSO);
+                    bullet.GetComponent<WebsiteBullet>().Initialize(pattern, websiteBulletDataSO);
                     break;
                 case BulletType.Deflectable:
                     bullet.GetComponent<DeflectableBullet>().Initialize(pattern, bossStats);

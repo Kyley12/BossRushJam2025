@@ -1,12 +1,13 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class BattleHandler : MonoBehaviour
 {
     public GameObject wheelTab; // Reference to the fortune wheel UI
     public int totalTurns = 5; // Total number of turns in the game
-    public float turnTimeLimit = 30f; // Time limit for each turn
+    public float turnTimeLimit = 60f; // Time limit for each turn
     public FortuneWheel fortuneWheel; // Reference to the FortuneWheel script
     public FolderSO[] folders; // List of folder ScriptableObjects
     public RageBar rageBar; // Reference to the rage bar system
@@ -20,6 +21,15 @@ public class BattleHandler : MonoBehaviour
 
     public TextMeshProUGUI timerText;
     public float timer;
+
+    public PlayerStatSO playerStat;
+
+    public EndingSO endingSo;
+
+    private void Awake()
+    {
+        playerStat.cursorHealth = playerStat.cursorMaxHealth;
+    }
 
     private void Start()
     {
@@ -89,6 +99,14 @@ public class BattleHandler : MonoBehaviour
             chosenFolder = fortuneWheel.selectedFolder;
             chosenFolder.currFolderState = FolderStates.inDanger;
 
+            // Start the boss AI behavior
+            var bossAI = boss.GetComponent<BossAI>();
+            if (bossAI != null)
+            {
+                bossAI.enabled = true; // Enable the Boss AI
+                Debug.Log("Boss AI started.");
+            }
+
             // Start the turn timer
             turnTimer = StartCoroutine(TurnTimer());
 
@@ -137,6 +155,18 @@ public class BattleHandler : MonoBehaviour
         if (folder.isGameOverWhenDeleted)
         {
             Debug.LogError("Game Over! Critical folder was deleted.");
+
+            switch (folder.folderName)
+            {
+                case "System":
+                    endingSo.currentEnding = Endings.System;
+                    break;
+                case "Image":
+                    endingSo.currentEnding = Endings.Image;
+                    break;
+            }
+
+            SceneManager.LoadScene("Ending");
             // Trigger game over logic here
         }
     }

@@ -170,14 +170,6 @@ public class VDCutsceneManager : MonoBehaviour
             yield return StartCoroutine(DisplayDialogues(cutscene4Data));
         }
 
-        // Start the boss AI behavior
-        var bossAI = boss.GetComponent<BossAI>();
-        if (bossAI != null)
-        {
-            bossAI.enabled = true; // Enable the Boss AI
-            Debug.Log("Boss AI started.");
-        }
-
         Debug.Log("Cutscene 4 completed!");
         isCutscene4Ended = true;
     }

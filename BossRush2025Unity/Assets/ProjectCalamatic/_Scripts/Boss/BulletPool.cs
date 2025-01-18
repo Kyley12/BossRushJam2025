@@ -37,14 +37,6 @@ public class BulletPool : MonoBehaviour
 
         if (typePool != null)
         {
-            foreach (var bullet in typePool.bullets)
-            {
-                if (!bullet.activeInHierarchy)
-                {
-                    Debug.Log($"Reusing bullet of type {bulletType}");
-                    return bullet;
-                }
-            }
 
             Debug.Log($"Instantiating new bullet of type {bulletType}");
             GameObject newBullet = Instantiate(typePool.bulletPrefab);

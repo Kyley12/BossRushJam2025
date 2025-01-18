@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 public class EndingManager : MonoBehaviour
 {
     public GameObject shutdownEnding;
+    public GameObject systemEnding;
+    public GameObject imageEnding;
+
     public EndingSO endingSO;
 
     private void Start()
@@ -18,8 +21,23 @@ public class EndingManager : MonoBehaviour
         if(endingSO.currentEnding == Endings.Shutdowned)
         {
             shutdownEnding.SetActive(true);
-            Invoke("GoBackToStart", 4f);
+            systemEnding.SetActive(false);
+            imageEnding.SetActive(false);
         }
+        else if(endingSO.currentEnding == Endings.System)
+        {
+            systemEnding.SetActive(true);
+            imageEnding.SetActive(false);
+            shutdownEnding.SetActive(false);
+        }
+        else if(endingSO.currentEnding == Endings.Image)
+        {
+            imageEnding.SetActive(true);
+            shutdownEnding.SetActive(false);
+            systemEnding.SetActive(false);
+        }
+
+        Invoke("GoBackToStart", 4f);
     }
 
     private void GoBackToStart()

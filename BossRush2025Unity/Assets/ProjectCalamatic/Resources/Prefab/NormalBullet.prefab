@@ -137,10 +137,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e561c8e2775cb8e49bc80befbd4242bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStat: {fileID: 11400000, guid: 90a2ddd85c3517b408fdfcbfc5c18ccd, type: 2}
   bulletPattern:
     bulletType: 1
     bulletsAmount: 0
     fireRate: 0
     startAngle: 0
     endAngle: 0
-  moveSpeed: 20
+  moveSpeed: 10

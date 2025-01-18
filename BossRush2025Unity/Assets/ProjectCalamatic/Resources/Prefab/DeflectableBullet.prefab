@@ -119,7 +119,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -144,4 +144,5 @@ MonoBehaviour:
     startAngle: 0
     endAngle: 0
   bossStats: {fileID: 11400000, guid: 6f65ec4855f7d1443ae24a5445129839, type: 2}
-  moveSpeed: 20
+  moveSpeed: 10
+  playerStat: {fileID: 11400000, guid: 90a2ddd85c3517b408fdfcbfc5c18ccd, type: 2}
