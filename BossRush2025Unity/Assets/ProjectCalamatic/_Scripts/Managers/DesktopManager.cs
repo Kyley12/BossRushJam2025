@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class DesktopManager : MonoBehaviour
 {
+    public GameObject background;
+    public GameObject website;
     public EndingSO endingSO;
 
     private bool isEmailTabActive;
@@ -19,6 +22,8 @@ public class DesktopManager : MonoBehaviour
     private void Awake()
     {
         SetAllTabToDefault();
+        background.SetActive(true);
+        website.SetActive(false);
     }
 
     public void OnEmailPressed()

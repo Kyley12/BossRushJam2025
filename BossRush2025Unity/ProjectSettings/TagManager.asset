@@ -9,6 +9,8 @@ TagManager:
   - PlayerHPText
   - CounterRange
   - Boss
+  - Background
+  - Website
   layers:
   - Default
   - TransparentFX

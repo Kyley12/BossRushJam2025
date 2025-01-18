@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum WebsiteType
 {
-    Google
+    SearchEngine
 }
 [CreateAssetMenu(fileName = "WebsiteDataSO", menuName = "Scriptable Objects/WebsiteDataSO")]
 public class WebsiteDataSO : ScriptableObject

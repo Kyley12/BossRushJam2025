@@ -12,6 +12,6 @@ public class BossStunbarDisplay : MonoBehaviour
     }
     private void Update()
     {
-        stunbar.value = bossStat.bossStunbarHealth / bossStat.bossStunbarHealth;
+        stunbar.value = bossStat.bossStunbarHealth / bossStat.bossStunbarHealthMax;
     }
 }

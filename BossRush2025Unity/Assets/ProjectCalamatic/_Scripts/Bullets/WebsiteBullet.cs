@@ -3,11 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class WebsiteBullet : MonoBehaviour
 {
+    public GameObject background;
+    public GameObject website;
     public PlayerStatSO playerStat;
     public BulletPattern bulletPattern; // Variables like speed, angle, etc.
     public ScriptableObject websiteBulletDataSO; // To store selected website pattern
     private Vector2 moveDirection;
     public float moveSpeed = 20f;
+
+    public WebsiteDataSO websiteDataSO;
 
     private Camera mainCamera;
 
@@ -20,6 +24,7 @@ public class WebsiteBullet : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+
         SetInitialDirection();
     }
 
@@ -28,7 +33,7 @@ public class WebsiteBullet : MonoBehaviour
         // Move the bullet forward
         transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
 
-        if(!IsWithinCameraBounds())
+        if (!IsWithinCameraBounds())
         {
             gameObject.SetActive(false);
         }
@@ -53,7 +58,9 @@ public class WebsiteBullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             playerStat.DecreaseHealth(2f);
-            SceneManager.LoadScene("WebsiteScene");
+            websiteDataSO.currentWebsiteType = (WebsiteType)Random.Range(0, 1);
+            WebsiteManager.isWebsiteActive = true;
+
             gameObject.SetActive(false);
         }
     }

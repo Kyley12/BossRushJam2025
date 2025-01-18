@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb529cc7514818469855fbec573ed4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossAI: {fileID: -232390019156688293, guid: 2540c87b9ce825d4884b13449219d469, type: 3}
   bulletPattern:
     bulletType: 2
     bulletsAmount: 0

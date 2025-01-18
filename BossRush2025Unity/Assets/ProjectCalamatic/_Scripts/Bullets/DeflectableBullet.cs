@@ -7,7 +7,7 @@ public class DeflectableBullet : MonoBehaviour
     public BossStatSo bossStats; // Reference to boss stats
     private Vector2 moveDirection; // Current move direction
     public float moveSpeed = 20f;
-    private bool isDeflected = false; // Whether the bullet has been deflected
+    public bool isDeflected = false; // Whether the bullet has been deflected
 
     private Camera mainCamera;
 
@@ -83,7 +83,8 @@ public class DeflectableBullet : MonoBehaviour
             if (bossStats.bossStunbarHealth < 0)
                 bossStats.bossStunbarHealth = 0;
 
-            gameObject.SetActive(false); // Deactivate bullet after hitting the boss
+            gameObject.SetActive(false);
+            isDeflected = false; // Deactivate bullet after hitting the boss
         }
     }
 }

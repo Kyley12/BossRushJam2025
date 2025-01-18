@@ -7,7 +7,7 @@ public class BattleHandler : MonoBehaviour
 {
     public GameObject wheelTab; // Reference to the fortune wheel UI
     public int totalTurns = 5; // Total number of turns in the game
-    public float turnTimeLimit = 60f; // Time limit for each turn
+    public float turnTimeLimit = 180f; // Time limit for each turn
     public FortuneWheel fortuneWheel; // Reference to the FortuneWheel script
     public FolderSO[] folders; // List of folder ScriptableObjects
     public RageBar rageBar; // Reference to the rage bar system
@@ -25,6 +25,8 @@ public class BattleHandler : MonoBehaviour
     public PlayerStatSO playerStat;
 
     public EndingSO endingSo;
+
+    public static bool isTimeHalted = false;
 
     private void Awake()
     {
@@ -134,7 +136,9 @@ public class BattleHandler : MonoBehaviour
                 yield return new WaitUntil(() => !isBossStunned); // Wait until boss is no longer stunned
             }
 
+            
             timer += Time.deltaTime;
+            
             yield return null;
         }
 

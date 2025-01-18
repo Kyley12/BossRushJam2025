@@ -75,7 +75,7 @@ public class ActionNode : TreeNode
             }
         }
 
-        float moveSpeed = 3f;
+        float moveSpeed = 2f;
         bossAI.transform.position = Vector3.MoveTowards(
             bossAI.transform.position,
             targetPosition,
