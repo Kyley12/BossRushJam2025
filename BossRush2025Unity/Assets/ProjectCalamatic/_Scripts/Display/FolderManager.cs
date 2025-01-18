@@ -47,7 +47,6 @@ public class FolderManager : MonoBehaviour
     {
         if(folders[i].currFolderState == FolderStates.retrieved)
         {
-            numFolderRetreived++;
             switch(folders[i].folderName)
             {
                 case "System":
@@ -60,6 +59,19 @@ public class FolderManager : MonoBehaviour
                     inventorySoundFolder.SetActive(true);
                     break;
             }
+        }
+
+        if(!inventoryImageFolder.activeInHierarchy)
+        {
+            numFolderRetreived ++;
+        }
+        else if(!inventorySystemFolder.activeInHierarchy)
+        {
+            numFolderRetreived ++;
+        }
+        else if(!inventorySoundFolder.activeInHierarchy)
+        {
+            numFolderRetreived ++;
         }
     }
 

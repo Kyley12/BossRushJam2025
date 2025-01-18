@@ -66,13 +66,6 @@ public class FortuneWheel : MonoBehaviour
         }
 
         isSpinning = false;
-
-        // Check if all folders are deactivated
-        if (CheckAllFoldersDeactivated())
-        {
-            Debug.Log("All folders deactivated. Battle ends.");
-            battleHandler.EndBattle();
-        }
     }
 
     private void AlignToFirstSegment()
