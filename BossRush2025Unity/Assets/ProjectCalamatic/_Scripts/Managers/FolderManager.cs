@@ -5,7 +5,7 @@ using UnityEngine;
 public class FolderManager : MonoBehaviour
 {
     public List<FolderSO> folders;
-    public int numFolderRetreived = 0;
+    public static int numFolderRetreived = 0;
 
     public TextMeshProUGUI systemStatus;
     public TextMeshProUGUI imageStatus;
@@ -16,12 +16,20 @@ public class FolderManager : MonoBehaviour
     public GameObject inventorySoundFolder;
     public TextMeshProUGUI numFolderRetreivedText;
 
+    public static bool isReterived;
+
     private void Update()
     {
-        for (int index = 0; index < folders.Count; index++)
+        for(int index = 0; index < folders.Count; index++)
         {
-            DisplayMyComputerStatus(index);
             CheckCurrState(index);
+            DisplayMyComputerStatus(index);
+        }
+
+        if(isReterived)
+        {
+            numFolderRetreived++;
+            isReterived = false;
         }
 
         DisplayNumOfFolderRetreived();
@@ -59,19 +67,6 @@ public class FolderManager : MonoBehaviour
                     inventorySoundFolder.SetActive(true);
                     break;
             }
-        }
-
-        if(!inventoryImageFolder.activeInHierarchy)
-        {
-            numFolderRetreived ++;
-        }
-        else if(!inventorySystemFolder.activeInHierarchy)
-        {
-            numFolderRetreived ++;
-        }
-        else if(!inventorySoundFolder.activeInHierarchy)
-        {
-            numFolderRetreived ++;
         }
     }
 

@@ -5,7 +5,10 @@ public enum Endings
     Shutdowned,
     ShutdownedDuringGamePlay,
     Image,
-    System
+    System,
+    CursorBreak,
+    DefeatedBossButAtWhatCost,
+    DefeatedBoss
 }
 
 [CreateAssetMenu(fileName = "EndingSO", menuName = "Scriptable Objects/EndingSO")]

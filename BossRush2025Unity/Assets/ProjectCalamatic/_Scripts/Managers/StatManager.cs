@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StatManager : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class StatManager : MonoBehaviour
     public PlayerStatSO playerStat;
 
     public BattleHandler battleHandler;
+    public EndingSO ending;
 
     private void Start()
     {
@@ -20,6 +22,12 @@ public class StatManager : MonoBehaviour
         if(bossStat.bossStunbarHealth <= 0)
         {
             battleHandler.StunBoss();
+        }
+
+        if(playerStat.cursorHealth <= 0)
+        {
+            ending.currentEnding = Endings.CursorBreak;
+            SceneManager.LoadScene("Ending");
         }
     }
 }

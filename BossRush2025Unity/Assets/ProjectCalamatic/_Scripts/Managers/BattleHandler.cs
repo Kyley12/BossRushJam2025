@@ -32,6 +32,7 @@ public class BattleHandler : MonoBehaviour
     private void Awake()
     {
         playerStat.cursorHealth = playerStat.cursorMaxHealth;
+        
     }
 
     private void Start()
@@ -79,6 +80,7 @@ public class BattleHandler : MonoBehaviour
         {
             currentTurn++;
             Debug.Log($"Turn {currentTurn} begins!");
+            turnTimer = StartCoroutine(TurnTimer());
 
             wheelTab.SetActive(true);
             yield return null;
@@ -97,9 +99,6 @@ public class BattleHandler : MonoBehaviour
                 bossAI.enabled = true;
                 Debug.Log("Boss AI started.");
             }
-
-            turnTimer = StartCoroutine(TurnTimer());
-
             while (turnTimer != null)
             {
                 yield return null;
@@ -109,6 +108,7 @@ public class BattleHandler : MonoBehaviour
         }
 
         Debug.Log("Battle is over!");
+        EndBattle();
     }
 
     private IEnumerator TurnTimer()
@@ -145,7 +145,7 @@ public class BattleHandler : MonoBehaviour
             Debug.LogError("Game Over! Critical folder was deleted.");
             switch (folder.folderName)
             {
-                case "System": 
+                case "System":
                     ending.currentEnding = Endings.System;
                     break;
                 case "Image":
@@ -217,6 +217,8 @@ public class BattleHandler : MonoBehaviour
         isBossStunned = false;
         Debug.Log("Boss is no longer stunned. Starting new turn.");
 
+        yield return StartCoroutine(MoveBossToPosition(Vector3.zero));
+
         StartCoroutine(StartBattle());
     }
 
@@ -224,5 +226,46 @@ public class BattleHandler : MonoBehaviour
     {
         timerText.text = $"{timer:F1}";
     }
-    
+
+    private IEnumerator MoveBossToPosition(Vector3 targetPosition)
+    {
+        Debug.Log($"Boss is moving to {targetPosition}...");
+
+        Vector3 startPosition = boss.transform.position;
+        float moveSpeed = 3f;
+        float journey = 0f;
+
+        while (journey < 1f)
+        {
+            journey += Time.deltaTime * moveSpeed;
+            boss.transform.position = Vector3.Lerp(startPosition, targetPosition, journey);
+            yield return null;
+        }
+
+        Debug.Log($"Boss reached {targetPosition}.");
+    }
+
+    private void EndBattle()
+    {
+        timer = 0f;
+        var bossAI = boss.GetComponent<BossAI>();
+        if (bossAI != null)
+        {
+            bossAI.enabled = false;
+            Debug.Log("Boss AI disabled.");
+        }
+        PlayerCursorMovement.Instance.isRequiredCutsceneEnded = false;
+        PlayerCursorMovement.Instance.playerHPText.SetActive(false);
+
+        if(FolderManager.numFolderRetreived == 2)
+        {
+            ending.currentEnding = Endings.DefeatedBossButAtWhatCost;
+        }
+        else if(FolderManager.numFolderRetreived == 3)
+        {
+            ending.currentEnding = Endings.DefeatedBoss;
+        }
+        SceneManager.LoadScene("Ending");
+    }
+
 }

@@ -116,22 +116,18 @@ public class ActionNode : TreeNode
     private void SelectBulletTypeAndPattern()
     {
         currentBulletType = (BulletType)Random.Range(0, 3);
-        Debug.Log($"Selected BulletType: {currentBulletType}");
 
         var patterns = bossPatterns.GetPatterns(currentBulletType);
         if (patterns == null || patterns.Count == 0)
         {
-            Debug.LogError($"No patterns found for BulletType: {currentBulletType}");
             return;
         }
 
         randomPatternIndex = Random.Range(0, patterns.Count);
-        Debug.Log($"Selected pattern index: {randomPatternIndex}");
     }
 
     private void FirePattern(BossAI bossAI)
     {
-        Debug.Log("FirePattern called");
         var pattern = bossPatterns.GetPattern(currentBulletType, randomPatternIndex);
 
         if (pattern == null)

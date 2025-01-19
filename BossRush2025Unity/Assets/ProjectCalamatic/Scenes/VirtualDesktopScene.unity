@@ -305,7 +305,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 727186385
+  m_SortingLayerID: 1935697513
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &33265961
@@ -1241,8 +1241,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 727186385
-  m_SortingLayer: 9
+  m_SortingLayerID: 1935697513
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4bc88470679fbad43b670b62e47bc28f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1524,8 +1524,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 29471767
-  m_SortingLayer: 4
+  m_SortingLayerID: 727186385
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.61006284, g: 0.61006284, b: 0.61006284, a: 1}
@@ -1754,8 +1754,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 2071870601
-  m_SortingLayer: 5
+  m_SortingLayerID: 727186385
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2014,7 +2014,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3ecb2ba53761e4943891fcc74393c522, type: 2}
   - {fileID: 11400000, guid: a1f4627ec1bfeed40ab6eecacd3a9583, type: 2}
   - {fileID: 11400000, guid: dce36b39da4957342a2dc0c26f1ca61c, type: 2}
-  numFolderRetreived: 0
   systemStatus: {fileID: 837812327}
   imageStatus: {fileID: 488746648}
   soundStatus: {fileID: 653699742}
@@ -2092,6 +2091,7 @@ MonoBehaviour:
   bossStat: {fileID: 11400000, guid: 6f65ec4855f7d1443ae24a5445129839, type: 2}
   playerStat: {fileID: 11400000, guid: 90a2ddd85c3517b408fdfcbfc5c18ccd, type: 2}
   battleHandler: {fileID: 437000529}
+  ending: {fileID: 11400000, guid: 8871ee3d6a3f40849b2c55757e313a4f, type: 2}
 --- !u!1 &461465979
 GameObject:
   m_ObjectHideFlags: 0
@@ -4464,8 +4464,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 727186385
-  m_SortingLayer: 9
+  m_SortingLayerID: 1935697513
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4bc88470679fbad43b670b62e47bc28f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4554,7 +4554,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &904171475
 Transform:
   m_ObjectHideFlags: 0
@@ -4771,7 +4771,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 727186385
+  m_SortingLayerID: 1935697513
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &971800981
@@ -4851,8 +4851,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -990560487
-  m_SortingLayer: 8
+  m_SortingLayerID: 1935697513
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5895,7 +5895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1181867217
 Transform:
   m_ObjectHideFlags: 0
@@ -6634,8 +6634,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 727186385
-  m_SortingLayer: 9
+  m_SortingLayerID: 1935697513
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4bc88470679fbad43b670b62e47bc28f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -7055,8 +7055,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 830837883
-  m_SortingLayer: 3
+  m_SortingLayerID: -990560487
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.3050313, g: 0.54758894, b: 1, a: 1}
@@ -8053,7 +8053,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 727186385
+  m_SortingLayerID: 1935697513
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &1530363727
@@ -8697,8 +8697,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2069007359
-  m_SortingLayer: 6
+  m_SortingLayerID: 727186385
+  m_SortingLayer: 9
   m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -9240,7 +9240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1861752440
 Transform:
   m_ObjectHideFlags: 0

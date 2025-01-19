@@ -75,6 +75,12 @@ TagManager:
   - name: ErrorMessageText
     uniqueID: 727186385
     locked: 0
+  - name: The front of front
+    uniqueID: 1935697513
+    locked: 0
+  - name: RecycleBIn
+    uniqueID: 1544810037
+    locked: 0
   - name: Player
     uniqueID: 1374103655
     locked: 0

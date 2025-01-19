@@ -41,7 +41,7 @@ public class NormalBullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            playerStat.DecreaseHealth(2f);
+            playerStat.DecreaseHealth(20f);
             gameObject.SetActive(false);
         }
     }

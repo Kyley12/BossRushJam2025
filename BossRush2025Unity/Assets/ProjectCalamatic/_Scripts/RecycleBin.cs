@@ -25,7 +25,6 @@ public class RecycleBin : MonoBehaviour
             if (hit.collider != null)
             {
                 hasLanded = true;
-                Debug.Log("Recycle bin has landed on the ground via raycast.");
 
                 // Change bodyType to Kinematic to stop physics interactions
                 rb.bodyType = RigidbodyType2D.Static;
@@ -37,8 +36,8 @@ public class RecycleBin : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Player interacted with the recycle bin.");
             battleHandler.RetrieveFolderFromRecycleBin();
+            FolderManager.isReterived = true;
         }
     }
 }

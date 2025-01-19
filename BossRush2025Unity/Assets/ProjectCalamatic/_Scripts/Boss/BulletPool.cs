@@ -37,8 +37,6 @@ public class BulletPool : MonoBehaviour
 
         if (typePool != null)
         {
-
-            Debug.Log($"Instantiating new bullet of type {bulletType}");
             GameObject newBullet = Instantiate(typePool.bulletPrefab);
             newBullet.SetActive(false);
             typePool.bullets.Add(newBullet);
@@ -65,8 +63,6 @@ public class BulletPool : MonoBehaviour
                 }
             }
         }
-
-        Debug.Log("Inactive bullets cleared from all pools.");
     }
 
     /// <summary>
