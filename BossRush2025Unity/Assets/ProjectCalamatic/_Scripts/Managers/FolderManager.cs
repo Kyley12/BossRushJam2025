@@ -16,7 +16,21 @@ public class FolderManager : MonoBehaviour
     public GameObject inventorySoundFolder;
     public TextMeshProUGUI numFolderRetreivedText;
 
-    public static bool isReterived;
+    public static bool isReterived = false;
+
+    private void Start()
+    {
+        numFolderRetreived = 0;
+        inventoryImageFolder.SetActive(false);
+        inventorySystemFolder.SetActive(false);
+        inventorySoundFolder.SetActive(false);
+
+        for(int i = 0; i < folders.Count; i++)
+        {
+            folders[i].currFolderState = FolderStates.inDanger;
+        }
+        folders.Clear();
+    }
 
     private void Update()
     {
