@@ -29,7 +29,6 @@ public class FolderManager : MonoBehaviour
         {
             folders[i].currFolderState = FolderStates.inDanger;
         }
-        folders.Clear();
     }
 
     private void Update()

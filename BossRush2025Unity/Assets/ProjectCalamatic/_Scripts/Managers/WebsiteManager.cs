@@ -12,8 +12,15 @@ public class WebsiteManager : MonoBehaviour
     private float timer;
     public float maxTime = 5f;
 
+    private void Awake()
+    {
+        background.SetActive(true);
+        website.SetActive(false);
+    }
+
     private void Start()
     {
+
         switch (websiteData.currentWebsiteType.ToString())
         {
             case "SearchEngine":
