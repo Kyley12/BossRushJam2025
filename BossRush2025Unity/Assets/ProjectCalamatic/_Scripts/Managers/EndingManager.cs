@@ -22,63 +22,46 @@ public class EndingManager : MonoBehaviour
 
     private void Update()
     {
-        if(endingSO.currentEnding == Endings.Shutdowned)
+        // Display the active ending and unlock it
+        switch (endingSO.currentEnding)
         {
-            shutdownEnding.SetActive(true);
-            systemEnding.SetActive(false);
-            imageEnding.SetActive(false);
-            defeatBossButAtWhatCostEnding.SetActive(false);
-            defeatBossEnding.SetActive(false);
-            cursorBreakEnding.SetActive(false);
-        }
-        else if(endingSO.currentEnding == Endings.System)
-        {
-            systemEnding.SetActive(true);
-            imageEnding.SetActive(false);
-            shutdownEnding.SetActive(false);
-            defeatBossButAtWhatCostEnding.SetActive(false);
-            defeatBossEnding.SetActive(false);
-            cursorBreakEnding.SetActive(false);
-
-        }
-        else if(endingSO.currentEnding == Endings.Image)
-        {
-            imageEnding.SetActive(true);
-            shutdownEnding.SetActive(false);
-            systemEnding.SetActive(false);
-            defeatBossButAtWhatCostEnding.SetActive(false);
-            defeatBossEnding.SetActive(false);
-            cursorBreakEnding.SetActive(false);
-        }
-        else if(endingSO.currentEnding == Endings.CursorBreak)
-        {
-            imageEnding.SetActive(false);
-            shutdownEnding.SetActive(false);
-            systemEnding.SetActive(false);
-            defeatBossButAtWhatCostEnding.SetActive(false);
-            defeatBossEnding.SetActive(false);
-            cursorBreakEnding.SetActive(true);
-        }
-        else if(endingSO.currentEnding == Endings.DefeatedBossButAtWhatCost)
-        {
-            imageEnding.SetActive(false);
-            shutdownEnding.SetActive(false);
-            systemEnding.SetActive(false);
-            defeatBossButAtWhatCostEnding.SetActive(true);
-            defeatBossEnding.SetActive(false);
-            cursorBreakEnding.SetActive(false);
-        }
-        else if(endingSO.currentEnding == Endings.DefeatedBoss)
-        {
-            imageEnding.SetActive(false);
-            shutdownEnding.SetActive(false);
-            systemEnding.SetActive(false);
-            defeatBossButAtWhatCostEnding.SetActive(false);
-            defeatBossEnding.SetActive(true);
-            cursorBreakEnding.SetActive(false);
+            case Endings.Shutdowned:
+                ActivateEnding(shutdownEnding, Endings.Shutdowned);
+                break;
+            case Endings.System:
+                ActivateEnding(systemEnding, Endings.System);
+                break;
+            case Endings.Image:
+                ActivateEnding(imageEnding, Endings.Image);
+                break;
+            case Endings.CursorBreak:
+                ActivateEnding(cursorBreakEnding, Endings.CursorBreak);
+                break;
+            case Endings.DefeatedBoss:
+                ActivateEnding(defeatBossEnding, Endings.DefeatedBoss);
+                break;
+            case Endings.DefeatedBossButAtWhatCost:
+                ActivateEnding(defeatBossButAtWhatCostEnding, Endings.DefeatedBossButAtWhatCost);
+                break;
         }
 
         Invoke("GoBackToStart", 4f);
+    }
+
+    private void ActivateEnding(GameObject endingObject, Endings ending)
+    {
+        shutdownEnding.SetActive(false);
+        systemEnding.SetActive(false);
+        imageEnding.SetActive(false);
+        cursorBreakEnding.SetActive(false);
+        defeatBossEnding.SetActive(false);
+        defeatBossButAtWhatCostEnding.SetActive(false);
+
+        if (endingObject != null)
+        {
+            endingObject.SetActive(true);
+            EndingDataController.Instance.UnlockEnding(ending);
+        }
     }
 
     private void GoBackToStart()
