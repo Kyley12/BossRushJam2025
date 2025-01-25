@@ -14,6 +14,7 @@ public class EndingManager : MonoBehaviour
 
     private void Start()
     {
+        WebsiteManager.isWebsiteActive = false;
         VDCutsceneManager.isCutscene4Ended = false;
         shutdownEnding.SetActive(false);
         PlayerCursorMovement.Instance.isRequiredCutsceneEnded = false;
