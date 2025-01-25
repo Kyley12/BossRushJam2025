@@ -66,7 +66,8 @@ public class DeflectableBullet : MonoBehaviour
             {
                 Debug.Log("Deflected Bullet");
                 isDeflected = true;
-                moveDirection = -moveDirection;
+                moveDirection = (BossAI.bossPos - (Vector2)transform.position).normalized;
+                
             }
             else
             {
