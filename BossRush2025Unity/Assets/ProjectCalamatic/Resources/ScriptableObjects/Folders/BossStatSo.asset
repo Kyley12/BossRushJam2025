@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88d8441f77ac124eb9804a5910eb6d0, type: 3}
   m_Name: BossStatSo
   m_EditorClassIdentifier: 
-  bossStunbarHealth: 20
-  bossStunbarHealthMax: 20
+  bossStunbarHealth: 40
+  bossStunbarHealthMax: 60
   bossRagebarMax: 100
-  bossCurrRage: 20
+  bossCurrRage: 80
