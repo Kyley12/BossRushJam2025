@@ -151,6 +151,7 @@ public class VDCutsceneManager : MonoBehaviour
             Debug.LogError("Boss not found in the scene!");
             yield break;
         }
+        WebsiteManager.boss = boss;
 
         bossInitialPosition = boss.transform.position;
 

@@ -6,6 +6,7 @@ public class WebsiteManager : MonoBehaviour
     public GameObject escapeWay;
     public GameObject website;
     public GameObject background;
+    public static GameObject boss;
 
     public static bool isWebsiteActive;
 
@@ -16,12 +17,6 @@ public class WebsiteManager : MonoBehaviour
     {
         background.SetActive(true);
         website.SetActive(false);
-        switch (websiteData.currentWebsiteType.ToString())
-        {
-            case "SearchEngine":
-                StartCoroutine("SearchEnginePattern");
-                break;
-        }
     }
 
     private void Update()
@@ -39,6 +34,7 @@ public class WebsiteManager : MonoBehaviour
             {
                 website.SetActive(false);
                 background.SetActive(true);
+                boss.SetActive(true);
             }
         }
         else
@@ -48,12 +44,8 @@ public class WebsiteManager : MonoBehaviour
             {
                 background.SetActive(false);
                 website.SetActive(true);
+                boss.SetActive(false);
             }
         }
-    }
-
-    private void SearchEnginePattern()
-    {
-
     }
 }

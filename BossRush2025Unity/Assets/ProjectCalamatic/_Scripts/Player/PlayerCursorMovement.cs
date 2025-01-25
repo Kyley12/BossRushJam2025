@@ -140,8 +140,6 @@ public class PlayerCursorMovement : MonoBehaviour
         {
             isDeflectKeyPressed = false;
         }
-
-        Debug.Log("Deflect key state: " + isDeflectKeyPressed);
         // Clamp the position within the camera bounds
         Vector3 clampedPosition = transform.position;
         clampedPosition.x = Mathf.Clamp(transform.position.x, minBounds.x, maxBounds.x);
