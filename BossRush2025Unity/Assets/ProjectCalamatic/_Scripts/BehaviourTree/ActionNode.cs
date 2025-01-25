@@ -154,7 +154,6 @@ public class ActionNode : TreeNode
                 continue;
             }
 
-            Debug.Log($"Firing bullet of type {currentBulletType} at angle {angle}");
             bullet.transform.position = bossAI.transform.position;
             bullet.transform.rotation = Quaternion.identity;
             bullet.SetActive(true);
