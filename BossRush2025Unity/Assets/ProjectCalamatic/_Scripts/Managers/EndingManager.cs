@@ -17,6 +17,7 @@ public class EndingManager : MonoBehaviour
     {
         WebsiteManager.isWebsiteActive = false;
         VDCutsceneManager.isCutscene4Ended = false;
+        BattleHandler.isCriticalFolderDeletd = false;
         shutdownEnding.SetActive(false);
         PlayerCursorMovement.Instance.isRequiredCutsceneEnded = false;
         PlayerCursorMovement.Instance.playerHPText.SetActive(false);

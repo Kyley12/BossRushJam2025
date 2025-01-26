@@ -28,6 +28,7 @@ public class BattleHandler : MonoBehaviour
     public BossStatSo bossStats; // Reference to the BossStats script
 
     public EndingSO ending;
+    public static bool isCriticalFolderDeletd;
 
     private void Awake()
     {
@@ -108,7 +109,10 @@ public class BattleHandler : MonoBehaviour
         }
 
         Debug.Log("Battle is over!");
-        EndBattle();
+        if(!isCriticalFolderDeletd)
+        {
+            EndBattle();
+        }
     }
 
     private IEnumerator TurnTimer()
@@ -146,9 +150,11 @@ public class BattleHandler : MonoBehaviour
             {
                 case "System":
                     ending.currentEnding = Endings.System;
+                    isCriticalFolderDeletd = true;
                     break;
                 case "Image":
                     ending.currentEnding = Endings.Image;
+                    isCriticalFolderDeletd = true;
                     break;
             }
             SceneManager.LoadScene("Ending");
