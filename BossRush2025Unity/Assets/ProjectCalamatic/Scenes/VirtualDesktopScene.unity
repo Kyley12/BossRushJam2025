@@ -2049,7 +2049,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wheelTab: {fileID: 1381447718}
   totalTurns: 3
-  turnTimeLimit: 100
+  turnTimeLimit: 10
   fortuneWheel: {fileID: 418599133}
   folders: []
   rageBar: {fileID: 437000528}

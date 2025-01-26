@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class EndingManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class EndingManager : MonoBehaviour
         shutdownEnding.SetActive(false);
         PlayerCursorMovement.Instance.isRequiredCutsceneEnded = false;
         PlayerCursorMovement.Instance.playerHPText.SetActive(false);
+        StartCoroutine(HandleEndingAndGoBack());
     }
 
     private void Update()
@@ -45,8 +47,6 @@ public class EndingManager : MonoBehaviour
                 ActivateEnding(defeatBossButAtWhatCostEnding, Endings.DefeatedBossButAtWhatCost);
                 break;
         }
-
-        Invoke("GoBackToStart", 4f);
     }
 
     private void ActivateEnding(GameObject endingObject, Endings ending)
@@ -65,8 +65,12 @@ public class EndingManager : MonoBehaviour
         }
     }
 
-    private void GoBackToStart()
+    private IEnumerator HandleEndingAndGoBack()
     {
+        // Wait for the ending to finish any animations or transitions
+        yield return new WaitForSeconds(4f); // Or adjust this depending on your actual animation time
+
+        Debug.Log("End of ending sequence reached. Transitioning back to start scene.");
         SceneManager.LoadScene("StartScene");
     }
 }

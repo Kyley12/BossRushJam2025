@@ -142,7 +142,6 @@ public class BattleHandler : MonoBehaviour
 
         if (folder.isGameOverWhenDeleted)
         {
-            Debug.LogError("Game Over! Critical folder was deleted.");
             switch (folder.folderName)
             {
                 case "System":
