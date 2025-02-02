@@ -33,7 +33,7 @@ public class BattleHandler : MonoBehaviour
     private void Awake()
     {
         playerStat.cursorHealth = playerStat.cursorMaxHealth;
-        
+
     }
 
     private void Start()
@@ -81,6 +81,13 @@ public class BattleHandler : MonoBehaviour
         {
             currentTurn++;
             Debug.Log($"Turn {currentTurn} begins!");
+
+            if (turnTimer != null)
+            {
+                StopCoroutine(turnTimer);
+                turnTimer = null;
+            }
+
             turnTimer = StartCoroutine(TurnTimer());
 
             wheelTab.SetActive(true);
@@ -109,7 +116,7 @@ public class BattleHandler : MonoBehaviour
         }
 
         Debug.Log("Battle is over!");
-        if(!isCriticalFolderDeletd)
+        if (!isCriticalFolderDeletd)
         {
             EndBattle();
         }
@@ -262,11 +269,11 @@ public class BattleHandler : MonoBehaviour
         PlayerCursorMovement.Instance.isRequiredCutsceneEnded = false;
         PlayerCursorMovement.Instance.playerHPText.SetActive(false);
 
-        if(FolderManager.numFolderRetreived == 2)
+        if (FolderManager.numFolderRetreived == 2)
         {
             ending.currentEnding = Endings.DefeatedBossButAtWhatCost;
         }
-        else if(FolderManager.numFolderRetreived == 3)
+        else if (FolderManager.numFolderRetreived == 3)
         {
             ending.currentEnding = Endings.DefeatedBoss;
         }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BossStatSo
   m_EditorClassIdentifier: 
   bossStunbarHealth: 40
-  bossStunbarHealthMax: 60
+  bossStunbarHealthMax: 40
   bossRagebarMax: 100
   bossCurrRage: 80
